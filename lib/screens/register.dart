@@ -1,5 +1,5 @@
 import 'dart:convert';
-
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:renta/screens/login.dart';
@@ -23,6 +23,7 @@ TextEditingController repasswordcontroller = TextEditingController();
 TextEditingController fullnamecontroller = TextEditingController();
 TextEditingController usernamecontroller = TextEditingController();
 TextEditingController phoneNumbercontroller = TextEditingController();
+userStore() async {}
 // Future userregister() async {
 //   try {
 //     String url = "https://rentacar1311.azurewebsites.net/api/v1/signup";
@@ -64,10 +65,35 @@ TextEditingController phoneNumbercontroller = TextEditingController();
 //   }
 // }
 registerfirebase() async {
+  FirebaseAuth auth = FirebaseAuth.instance;
   try {
-    UserCredential userCredential = await FirebaseAuth.instance
-        .createUserWithEmailAndPassword(
-            email: emailcontroller.text, password: passwordcontroller.text);
+    await auth.createUserWithEmailAndPassword(
+        email: emailcontroller.text, password: passwordcontroller.text);
+    FirebaseFirestore db = FirebaseFirestore.instance;
+
+    String? uid = auth.currentUser?.uid;
+
+    try {
+      await db.collection("users").doc(uid).set({
+        "name": usernamecontroller.text,
+        "email": emailcontroller.text,
+        "phone": phoneNumbercontroller.text,
+        "password": passwordcontroller.text,
+        "repassword": repasswordcontroller.text,
+        "username": fullnamecontroller.text,
+      });
+      print("User is register");
+    } catch (e) {
+      print("$uid");
+      Fluttertoast.showToast(
+          msg: "$e",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.CENTER,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Colors.red,
+          textColor: Colors.white,
+          fontSize: 16.0);
+    }
     Fluttertoast.showToast(
         msg: "Register Successfull",
         toastLength: Toast.LENGTH_SHORT,
@@ -92,12 +118,13 @@ registerfirebase() async {
         backgroundColor: Colors.red,
         textColor: Colors.white,
         fontSize: 16.0);
-
-    // email.clear();
-    // password.clear();
-    // phoneNumbercontroller.clear();
-    // name.clear();
   }
+  emailcontroller.clear();
+  passwordcontroller.clear();
+  phoneNumbercontroller.clear();
+  usernamecontroller.clear();
+  repasswordcontroller.clear();
+  fullnamecontroller.clear();
 }
 
 class _registerState extends State<register> {
@@ -391,17 +418,12 @@ class _registerState extends State<register> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(top: 2.0, bottom: 8),
+                padding: const EdgeInsets.only(top: 3.0, bottom: 8),
                 child: Container(
-                  height: 30,
-                  width: 200,
-                  decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                          colors: [orangeColors, orangeLightColors],
-                          end: Alignment.bottomCenter,
-                          begin: Alignment.topCenter)),
                   child: ButtonWidget(
-                    onClick: () async {},
+                    onClick: () async {
+                      registerfirebase();
+                    },
                     //MaterialPageRoute(builder: (context) => Showroom()));
 
                     btnText: "Register",

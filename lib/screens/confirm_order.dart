@@ -1,5 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart';
 import 'package:renta/screens/splash_page.dart';
 
@@ -110,7 +113,7 @@ import 'time_location.dart';
 // }
 class ConfirmOrder extends StatelessWidget {
   String car2;
-  String? address;
+  String address;
   String price;
   String? package;
   String pack2;
@@ -120,26 +123,60 @@ class ConfirmOrder extends StatelessWidget {
       {required this.img,
       required this.car2,
       required this.pack2,
-      this.address,
+      required this.address,
       this.package,
       required this.price});
   String url =
       "https://rentacar1311.azurewebsites.net/api/v1/order/create-order";
 
   postdata() async {
+    var pagl;
+
+    final user = FirebaseAuth.instance.currentUser;
+
     try {
-      final response = await post(Uri.parse(url), body: {
-        // "message": "valid",
-        "userId": "6203ebedb94c608b4ff392dc",
+      FirebaseFirestore db = FirebaseFirestore.instance;
+      final userCredentials = await FirebaseFirestore.instance
+          .collection("users")
+          .doc(user?.uid)
+          .get();
+
+      pagl = userCredentials.data()?["email"];
+
+      print(pagl);
+
+      await db.collection("order").doc(user.toString()).set({
+        "name": userCredentials.data()!["name"],
+        "email": userCredentials.data()!["email"],
+        "phone": userCredentials.data()!["phone"],
+        "username": userCredentials.data()!["username"],
+        "datetime": "$selectedDate",
         "carId": "$car2",
         "carColor": "White",
         "packageName": "$pack2",
         "orderedAddress": "$address",
+
         // "forWedding": wedyes ? "Yes" : "No",
       });
-      print(" ${response.body} Data is post");
+      Fluttertoast.showToast(
+          msg: "Your Order is place $pagl",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.CENTER,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Colors.red,
+          textColor: Colors.white,
+          fontSize: 16.0);
+      // print(" ${response.body} Data is post");
     } catch (e) {
       print(e.toString());
+      Fluttertoast.showToast(
+          msg: "$e",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.CENTER,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Colors.red,
+          textColor: Colors.white,
+          fontSize: 16.0);
     }
   }
 
@@ -281,8 +318,8 @@ Address: ${address} """,
                 Padding(
                   padding: const EdgeInsets.only(top: 8.0),
                   child: GestureDetector(
-                    onTap: () {
-                      postdata();
+                    onTap: () async {
+                      await postdata();
                     },
                     child: Container(
                       height: 50,

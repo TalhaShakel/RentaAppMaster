@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 import 'package:http/http.dart' as http;
 import 'package:renta/screens/splash_page.dart';
@@ -234,6 +235,14 @@ class Single extends StatelessWidget {
         print("This package is selected: $daysss");
         pricefinal = price;
         print("Package is selected $pricefinal");
+        Fluttertoast.showToast(
+            msg: "Package is selected $daysss \n $pricefinal",
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.CENTER,
+            timeInSecForIosWeb: 1,
+            backgroundColor: Colors.red,
+            textColor: Colors.white,
+            fontSize: 16.0);
       },
       child: Container(
         height: MediaQuery.of(context).size.height * 0.1,

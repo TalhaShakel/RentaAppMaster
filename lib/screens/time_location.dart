@@ -126,11 +126,11 @@ class _Time_locationState extends State<Time_location> {
                       context,
                       MaterialPageRoute(
                           builder: (context) => ConfirmOrder(
+                              address: address.toString(),
                               img: widget.img,
                               car2: widget.car1,
-                              price:widget.price.toString(),
+                              price: widget.price.toString(),
                               pack2: widget.pack.toString())));
-                              
                 },
                 child: Container(
                   height: 50,
