@@ -75,12 +75,12 @@ registerfirebase() async {
 
     try {
       await db.collection("users").doc(uid).set({
-        "name": usernamecontroller.text,
+        "name": fullnamecontroller.text,
         "email": emailcontroller.text,
         "phone": phoneNumbercontroller.text,
         "password": passwordcontroller.text,
         "repassword": repasswordcontroller.text,
-        "username": fullnamecontroller.text,
+        "username": usernamecontroller.text,
       });
       print("User is register");
     } catch (e) {

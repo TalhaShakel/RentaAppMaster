@@ -7,6 +7,7 @@ import 'package:renta/screens/login.dart';
 import 'package:renta/screens/splash_page.dart';
 import 'package:renta/widgets/slider.dart';
 
+import '../components/main_drawer.dart';
 import 'singleperson.dart';
 
 class ServicesProvider extends StatefulWidget {
@@ -62,35 +63,7 @@ class _ServicesProviderState extends State<ServicesProvider> {
     var heightScreen = MediaQuery.of(context).size.height;
     return Scaffold(
       drawer: Drawer(
-        child: ListView(
-          // Important: Remove any padding from the ListView.
-          padding: EdgeInsets.zero,
-          children: [
-            const DrawerHeader(
-              decoration: BoxDecoration(
-                color: Colors.blue,
-              ),
-              child: Text('Drawer Header'),
-            ),
-            ListTile(
-              title: const Text('Item 1'),
-              onTap: () {
-                // Update the state of the app.
-                // ...
-              },
-            ),
-            ListTile(
-              title: const Text('Log Out'),
-              onTap: () {
-                FirebaseAuth.instance.signOut();
-                Navigator.push(
-                    context, MaterialPageRoute(builder: (context) => login()));
-                // Update the state of the app.
-                // ...
-              },
-            ),
-          ],
-        ),
+        child: Main_Drawer(),
       ),
       appBar: AppBar(
         backgroundColor: orangeColors,

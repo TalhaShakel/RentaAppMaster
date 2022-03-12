@@ -52,6 +52,9 @@ class ConfirmOrder extends StatelessWidget {
         "carColor": "White",
         "packageName": "$pack2",
         "orderedAddress": "$address",
+        "time": selectedDate.toString(),
+        "Day": selectedDate.day.toString(),
+        "price": price.toString(),
 
         // "forWedding": wedyes ? "Yes" : "No",
       });
@@ -95,8 +98,6 @@ class ConfirmOrder extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  ///Fuel Charges:  All other Cars are from Same Level of Fuel to Same Level of Fuel
-                  ///Important note:
                   Center(
                     child: Image.network(
                       img.toString(),
@@ -204,10 +205,10 @@ Add On Charges will be applied for Extra Per Hour
                                 fontWeight: FontWeight.bold),
                           ),
                           Text(
-                            """Package: $pack2
-Price: $price
+                            """Package: ${pack2.toUpperCase()}
+Price: ${price.toUpperCase()}
 Delivery Date: ${selectedDate}
-Address: ${address} """,
+Address: ${address.toUpperCase()} """,
                             style: TextStyle(
                                 letterSpacing: 1, fontWeight: FontWeight.bold),
                           ),
@@ -239,9 +240,6 @@ Address: ${address} """,
                                     text: 'Place Order',
                                     style: const TextStyle(
                                         fontSize: 18, color: Colors.white),
-                                    // recognizer: TapGestureRecognizer()
-                                    // onTap = () {
-                                    // print("months");
                                   ),
                                 ],
                               ),
@@ -251,11 +249,6 @@ Address: ${address} """,
                       ),
                     ),
                   ),
-                  // ElevatedButton(
-                  //     onPressed: () {
-                  //       postdata();
-                  //     },
-                  //     child: Text("Post"))
                 ]),
           ),
         ),

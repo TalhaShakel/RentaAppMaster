@@ -155,17 +155,17 @@ class Single extends StatelessWidget {
                   children: [
                     buildPricePerPeriod(
                       context,
-                      "hours5",
+                      "hours 5",
                       "${pack[0]["hours5"]} PKR",
                     ),
                     buildPricePerPeriod(
                       context,
-                      "hours10",
+                      "hours 10",
                       "${pack[0]["hours10"]} PKR",
                     ),
                     buildPricePerPeriod(
                       context,
-                      "hours24",
+                      "hours 24",
                       "${pack[0]["hours24"]} PKR",
                     ),
                   ],
@@ -176,7 +176,7 @@ class Single extends StatelessWidget {
                 children: [
                   buildPricePerPeriod(
                     context,
-                    "outOfCity",
+                    "out Of City",
                     "${pack[0]["outOfCity"]} PKR",
                   ),
                   buildPricePerPeriod(
@@ -299,13 +299,13 @@ class Single extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             Text(
-              months,
+              months.toUpperCase(),
               style: TextStyle(
-                letterSpacing: 1,
+                letterSpacing: 2,
                 color:
                     // selected ? Colors.white :
                     Colors.black,
-                fontSize: 14,
+                fontSize: 17,
                 // fontWeight: FontWeight.bold,
               ),
             ),
@@ -316,7 +316,7 @@ class Single extends StatelessWidget {
                 color:
                     // selected ? Colors.white :
                     Colors.black,
-                fontSize: 14,
+                fontSize: 16,
                 // fontWeight: FontWeight.bold,
               ),
             ),
