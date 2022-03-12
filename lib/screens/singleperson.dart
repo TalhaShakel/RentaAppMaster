@@ -23,202 +23,228 @@ class Single extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return SafeArea(
-      child: Scaffold(
-        body: SingleChildScrollView(
+        child: Scaffold(
+      body: Container(
+        height: MediaQuery.of(context).size.height,
+        color: Colors.white,
+        child: SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Column(
-                children: [
-                  Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 16),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          GestureDetector(
-                            onTap: () {
-                              Navigator.pop(context);
-                            },
-                            child: Container(
-                                width: 45,
-                                height: 45,
-                                decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: const BorderRadius.all(
-                                    const Radius.circular(15),
-                                  ),
-                                  border: Border.all(
-                                    color: Colors.blue,
-                                    width: 1,
-                                  ),
-                                ),
-                                child: const Icon(
-                                  Icons.keyboard_arrow_left,
-                                  color: Colors.black,
-                                  size: 28,
-                                )),
-                          ),
-                          Row(
-                            children: [
-                              Container(
+              Container(
+                decoration: BoxDecoration(
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black,
+                        blurRadius: 2.0,
+                        spreadRadius: 0.0,
+                        offset:
+                            Offset(2.0, 2.0), // shadow direction: bottom right
+                      )
+                    ],
+                    color: Colors.white,
+                    borderRadius: BorderRadius.only(
+                      bottomRight: Radius.circular(25),
+                      bottomLeft: Radius.circular(25),
+                    )),
+                child: Column(
+                  children: [
+                    Container(
+                        decoration: BoxDecoration(
+                            // color: Colors.black26,
+                            ),
+                        padding: const EdgeInsets.symmetric(horizontal: 16),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.pop(context);
+                              },
+                              child: Container(
                                   width: 45,
                                   height: 45,
                                   decoration: BoxDecoration(
-                                    color: orangeColors,
+                                    color: Colors.white,
                                     borderRadius: const BorderRadius.all(
                                       const Radius.circular(15),
                                     ),
-                                  ),
-                                  child: const Icon(
-                                    Icons.bookmark_border,
-                                    color: Colors.white,
-                                    size: 22,
-                                  )),
-                              const SizedBox(
-                                width: 16,
-                              ),
-                              Container(
-                                  width: 45,
-                                  height: 45,
-                                  decoration: BoxDecoration(
-                                    borderRadius: const BorderRadius.all(
-                                      Radius.circular(15),
-                                    ),
                                     border: Border.all(
-                                      color: Colors.grey,
+                                      color: Colors.blue,
                                       width: 1,
                                     ),
                                   ),
                                   child: const Icon(
-                                    Icons.share,
+                                    Icons.keyboard_arrow_left,
                                     color: Colors.black,
-                                    size: 22,
+                                    size: 28,
                                   )),
-                            ],
-                          ),
-                        ],
-                      )),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Center(
-                      child: Image.network(
-                        image.toString(),
-                        height: MediaQuery.of(context).size.height * 0.3,
-                        fit: BoxFit.contain,
-                        // height: 11,
+                            ),
+                            Row(
+                              children: [
+                                Container(
+                                    width: 45,
+                                    height: 45,
+                                    decoration: BoxDecoration(
+                                      color: orangeColors,
+                                      borderRadius: const BorderRadius.all(
+                                        const Radius.circular(15),
+                                      ),
+                                    ),
+                                    child: const Icon(
+                                      Icons.bookmark_border,
+                                      color: Colors.white,
+                                      size: 22,
+                                    )),
+                                const SizedBox(
+                                  width: 16,
+                                ),
+                                Container(
+                                    width: 45,
+                                    height: 45,
+                                    decoration: BoxDecoration(
+                                      borderRadius: const BorderRadius.all(
+                                        Radius.circular(15),
+                                      ),
+                                      border: Border.all(
+                                        color: Colors.grey,
+                                        width: 1,
+                                      ),
+                                    ),
+                                    child: const Icon(
+                                      Icons.share,
+                                      color: Colors.black,
+                                      size: 22,
+                                    )),
+                              ],
+                            ),
+                          ],
+                        )),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Center(
+                        child: Image.network(
+                          image.toString(),
+                          height: MediaQuery.of(context).size.height * 0.3,
+                          fit: BoxFit.contain,
+                          // height: 11,
+                        ),
+                        // ),
                       ),
-                      // ),
                     ),
+                    Container(
+                      child: Padding(
+                        padding: const EdgeInsets.only(right: 20.0, top: 7.0),
+                        child: Padding(
+                          padding: const EdgeInsets.only(top: 18.0),
+                          child: Center(
+                            child: Text(carName,
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold, fontSize: 35)),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 18.0, bottom: 18),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    buildPricePerPeriod(
+                      context,
+                      "hours5",
+                      "${pack[0]["hours5"]} PKR",
+                    ),
+                    buildPricePerPeriod(
+                      context,
+                      "hours10",
+                      "${pack[0]["hours10"]} PKR",
+                    ),
+                    buildPricePerPeriod(
+                      context,
+                      "hours24",
+                      "${pack[0]["hours24"]} PKR",
+                    ),
+                  ],
+                ),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  buildPricePerPeriod(
+                    context,
+                    "outOfCity",
+                    "${pack[0]["outOfCity"]} PKR",
+                  ),
+                  buildPricePerPeriod(
+                    context,
+                    "weekly",
+                    "${pack[0]["weekly"]} PKR",
+                  ),
+                  buildPricePerPeriod(
+                    context,
+                    "monthly",
+                    "${pack[0]["monthly"]} PKR",
                   ),
                 ],
               ),
-              Column(
-                children: [
-                  Container(
-                    child: Padding(
-                      padding: const EdgeInsets.only(right: 20.0, top: 7.0),
-                      child: Padding(
-                        padding: const EdgeInsets.only(top: 18.0),
-                        child: Center(
-                          child: Text(carName,
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 15)),
+              Padding(
+                padding: const EdgeInsets.only(top: 8.0),
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => Time_location(
+                                img: image,
+                                pack: daysss.toString(),
+                                car1: carName,
+                                price: pricefinal.toString())));
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 10, horizontal: 18.0),
+                    child: Container(
+                      height: 50,
+                      decoration: BoxDecoration(
+                        color: orangeColors,
+                        borderRadius: const BorderRadius.all(
+                          Radius.circular(10),
                         ),
                       ),
-                    ),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      buildPricePerPeriod(
-                        context,
-                        "hours5",
-                        "${pack[0]["hours5"]} PKR",
-                      ),
-                      buildPricePerPeriod(
-                        context,
-                        "hours10",
-                        "${pack[0]["hours10"]} PKR",
-                      ),
-                      buildPricePerPeriod(
-                        context,
-                        "hours24",
-                        "${pack[0]["hours24"]} PKR",
-                      ),
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      buildPricePerPeriod(
-                        context,
-                        "outOfCity",
-                        "${pack[0]["outOfCity"]} PKR",
-                      ),
-                      buildPricePerPeriod(
-                        context,
-                        "weekly",
-                        "${pack[0]["weekly"]} PKR",
-                      ),
-                      buildPricePerPeriod(
-                        context,
-                        "monthly",
-                        "${pack[0]["monthly"]} PKR",
-                      ),
-                    ],
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 8.0),
-                    child: GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => Time_location(
-                                    img: image,
-                                    pack: daysss.toString(),
-                                    car1: carName,
-                                    price: pricefinal.toString())));
-                      },
-                      child: Container(
-                        height: 50,
-                        decoration: BoxDecoration(
-                          color: orangeColors,
-                          borderRadius: const BorderRadius.all(
-                            Radius.circular(10),
-                          ),
-                        ),
-                        child: Center(
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 24),
-                            child: RichText(
-                              text: TextSpan(
-                                children: [
-                                  TextSpan(
-                                    text: 'Place Order',
-                                    style: const TextStyle(
-                                        fontSize: 18, color: Colors.white),
-                                    // recognizer: TapGestureRecognizer()
-                                    // onTap = () {
-                                    // print("months");
-                                  ),
-                                ],
-                              ),
+                      child: Center(
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 24),
+                          child: RichText(
+                            text: TextSpan(
+                              children: [
+                                TextSpan(
+                                  text: 'Place Order',
+                                  style: const TextStyle(
+                                      fontSize: 18, color: Colors.white),
+                                  // recognizer: TapGestureRecognizer()
+                                  // onTap = () {
+                                  // print("months");
+                                ),
+                              ],
                             ),
                           ),
                         ),
                       ),
                     ),
                   ),
-                ],
+                ),
               ),
-              //   C
             ],
           ),
+          //   C
         ),
-        // (ye nav ka secion hai)
       ),
-    );
+    ));
+    // (ye nav ka secion hai)
   }
 
   String pricefinal = "";
