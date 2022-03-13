@@ -32,7 +32,9 @@ class _ServicesProviderState extends State<ServicesProvider> {
     // print("hhh" + ssd.toString());
 
     var h = ssd[0]['packages'][0]['weekly'];
-
+    for (var y = 0; y == "sedan"; y++) {
+      print(ssd[y]['category']);
+    }
     if (response.statusCode == 200 || response.statusCode == 400) {
       print(h.toString());
 
@@ -44,6 +46,7 @@ class _ServicesProviderState extends State<ServicesProvider> {
           'carName': ssd[i]['carName'],
           'color': ssd[i]['color'],
           'packages': ssd[i]['packages'],
+          'category': ssd[i]['category']
         });
       }
     }
@@ -100,6 +103,7 @@ class _ServicesProviderState extends State<ServicesProvider> {
                             width: widthScreen * 0.5,
                             child: InkWell(
                               onTap: () {
+                                getList();
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
@@ -110,6 +114,7 @@ class _ServicesProviderState extends State<ServicesProvider> {
                                               model: list[index]['modal'],
                                               color: list[index]['color'],
                                               pack: list[index]["packages"],
+                                              // categ:list[index]["category"],
                                               // serviceName: list[index]
                                               //     ['service_name'],
                                             )));
@@ -140,7 +145,10 @@ class _ServicesProviderState extends State<ServicesProvider> {
                                             // mainAxisAlignment: MainAxisAlignment.start,
                                             children: [
                                               Text(
-                                                list[index]['modal'],
+                                                list[index]['category']
+                                                    .toString()
+                                                // list[index]['modal']
+                                                ,
                                                 style: TextStyle(
                                                     fontSize: 20,
                                                     fontWeight:
