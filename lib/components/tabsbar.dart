@@ -209,9 +209,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ],
           ),
         ),
-        body: 
-        
-        TabBarView(
+        body: TabBarView(
           children: [
             // page 1
             SingleChildScrollView(

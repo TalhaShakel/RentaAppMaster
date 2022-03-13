@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:renta/components/tabs.dart';
 import 'package:renta/components/tabsbar.dart';
 import 'package:renta/screens/login.dart';
 import 'package:renta/screens/services_provider.dart';
@@ -33,7 +34,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: MyApp2(),
+      home: ServicesProvider(),
     );
   }
 }
