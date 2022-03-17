@@ -59,11 +59,11 @@ class ConfirmOrder extends StatelessWidget {
         // "forWedding": wedyes ? "Yes" : "No",
       });
       Fluttertoast.showToast(
-          msg: "Your Order is place $pagl",
+          msg: "Your Order have been place! $pagl",
           toastLength: Toast.LENGTH_SHORT,
           gravity: ToastGravity.CENTER,
-          timeInSecForIosWeb: 1,
-          backgroundColor: Colors.red,
+          timeInSecForIosWeb: 3,
+          backgroundColor: Color(0xFF1B6A65),
           textColor: Colors.white,
           fontSize: 16.0);
       // print(" ${response.body} Data is post");
@@ -87,7 +87,7 @@ class ConfirmOrder extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color(0xFF1B6A65),
-        title: Text("My Bookings Details"),
+        title: const Text("My Bookings Details"),
       ),
       body: Container(
         color: Colors.white,
@@ -109,76 +109,75 @@ class ConfirmOrder extends StatelessWidget {
                   ),
                   Text(
                     car2.toString(),
+                    // ignore: prefer_const_constructors
                     style: TextStyle(
                         fontSize: 35,
                         letterSpacing: 1,
                         fontWeight: FontWeight.bold),
                   ),
                   Container(
-                    padding: EdgeInsets.all(14),
+                    padding: const EdgeInsets.all(14),
                     decoration: BoxDecoration(
-                        borderRadius: BorderRadius.all(
-                            Radius.circular(10.0)), // Set rounded corner radius
-
-                        border: Border.all(
-                          color: Color(0xFF1B6A65),
-                          width: 4,
-                        )),
+                        
+                      ),
                     child: Column(
                       children: [
-                        Text(
+                        const Text(
                           "Terms & Conditions",
                           style: TextStyle(
                               fontSize: 18,
                               letterSpacing: 1,
                               fontWeight: FontWeight.bold),
                         ),
-                        Text(
-                          """1-With Driver 
-2-No fuel Commissions &Without Fuel
-3-No High-fares No HiddenCharges.""",
+                        const Text(
+                          """. With Driver 
+. No fuel Commissions &Without Fuel
+. No High-fares No HiddenCharges.""",
                           textAlign: TextAlign.left,
-                          style: TextStyle(
-                              letterSpacing: 1, fontWeight: FontWeight.bold),
+                          style: const TextStyle(
+                              letterSpacing: 1,),
                         ),
                       ],
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(top: 18.0),
+                    padding: const EdgeInsets.only(top: 10.0),
                     child: Container(
-                      padding: EdgeInsets.all(14),
+                      padding: const EdgeInsets.all(14),
                       decoration: BoxDecoration(
-                          borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                          border: Border.all(
-                            color: Color(0xFF1B6A65),
-                            width: 4,
-                          )),
+                          // borderRadius: const BorderRadius.all(const Radius.circular(10.0)),
+                          // border: Border.all(
+                          //   color: const Color(0xFF1B6A65),
+                          //   width: 4,
+                          // )
+                        ),
                       child: Column(
                         children: [
-                          Text(
+                          const Text(
                             "IMPORTANT NOTE",
-                            style: TextStyle(
+                            textAlign: TextAlign.left,
+                            style: const TextStyle(
                                 fontSize: 18,
                                 letterSpacing: 1,
                                 fontWeight: FontWeight.bold),
                           ),
-                          Text(
+                          const Text(
                             """Rental Charges only Valid for Karachi CITY. 
-Add On Charges will be applied for Extra Per Hour
+Add On Charges will be applied for Extra Per Hours
 1-Sedan = 250
 2- Hatch Back = 200
 3- Luxury & SUV= 500""",
-                            style: TextStyle(
-                                letterSpacing: 1, fontWeight: FontWeight.bold),
+                            style: const TextStyle(
+                                letterSpacing: 1,),
                           ),
-                          Padding(
-                            padding: const EdgeInsets.only(top: 8.0),
-                            child: Text(
+                          const Padding(
+                            padding: EdgeInsets.only(top: 8.0),
+                            child: const Text(
                               "Rental charges are only valid for within Karachi City. Rs.500/HOUR will be charged for an extra hour in HalfDAY Rental Rs.200/HOUR will be charged for an extra hour in FULL-DAY Rental.",
+                              textAlign: TextAlign.left,
                               style: TextStyle(
                                   letterSpacing: 1,
-                                  fontWeight: FontWeight.bold),
+                                  ),
                             ),
                           ),
                         ],
@@ -188,17 +187,16 @@ Add On Charges will be applied for Extra Per Hour
                   Padding(
                     padding: const EdgeInsets.only(top: 18.0),
                     child: Container(
-                      padding: EdgeInsets.all(14),
+                      padding: const EdgeInsets.all(14),
                       decoration: BoxDecoration(
-                          borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                          border: Border.all(
-                            color: Color(0xFF1B6A65),
-                            width: 4,
-                          )),
+                          borderRadius: const BorderRadius.all(Radius.circular(10.0)),
+                        
+                        ),
                       child: Column(
                         children: [
-                          Text(
-                            "ORDER SUMMARY",
+                          const Text(
+                          "ORDER SUMMARY",
+                          textAlign: TextAlign.left,
                             style: TextStyle(
                                 fontSize: 18,
                                 letterSpacing: 1,
@@ -209,8 +207,8 @@ Add On Charges will be applied for Extra Per Hour
 Price: ${price.toUpperCase()}
 Delivery Date: ${selectedDate}
 Address: ${address.toUpperCase()} """,
-                            style: TextStyle(
-                                letterSpacing: 1, fontWeight: FontWeight.bold),
+                            style: const TextStyle(
+                                letterSpacing: 1,),
                           ),
                         ],
                       ),
@@ -234,11 +232,11 @@ Address: ${address.toUpperCase()} """,
                           child: Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 24),
                             child: RichText(
-                              text: TextSpan(
+                              text: const TextSpan(
                                 children: [
                                   TextSpan(
                                     text: 'Place Order',
-                                    style: const TextStyle(
+                                    style: TextStyle(
                                         fontSize: 18, color: Colors.white),
                                   ),
                                 ],

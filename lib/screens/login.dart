@@ -1,24 +1,20 @@
 // import 'dart:js';
 
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:renta/components/main_drawer.dart';
-import 'package:renta/screens/test.dart';
-
 import 'services_provider.dart';
 import 'register.dart';
 import 'splash_page.dart';
 
 class login extends StatefulWidget {
   const login({Key? key}) : super(key: key);
-
   @override
   State<login> createState() => _loginState();
 }
 
-// final _formKey = GlobalKey<FormState>();
+bool _isObscure = true;
 
 class _loginState extends State<login> {
   bool valuefirst = false;
@@ -69,7 +65,7 @@ class _loginState extends State<login> {
             toastLength: Toast.LENGTH_SHORT,
             gravity: ToastGravity.CENTER,
             timeInSecForIosWeb: 1,
-            backgroundColor: Colors.red,
+            backgroundColor: orangeColors,
             textColor: Colors.white,
             fontSize: 16.0);
         Navigator.push(context,
@@ -111,7 +107,7 @@ class _loginState extends State<login> {
           ),
         ),
         Positioned(
-            top: 200,
+            top: 100,
             left: 50,
             right: 50,
             child: Container(
@@ -125,7 +121,7 @@ class _loginState extends State<login> {
                 borderRadius: BorderRadius.circular(25),
                 // ignore: prefer_const_literals_to_create_immutables
                 boxShadow: [
-                  BoxShadow(
+                  const BoxShadow(
                     color: Colors.grey,
                     blurRadius: 25.0,
                   ),
@@ -161,27 +157,28 @@ class _loginState extends State<login> {
                     //     )
                     //     ),
                     Container(
-                      margin: EdgeInsets.only(top: 8, left: 10, right: 10),
-                      padding: EdgeInsets.all(10),
+                      margin:
+                          const EdgeInsets.only(top: 8, left: 10, right: 10),
+                      padding: const EdgeInsets.all(10),
                       child: TextFormField(
                         controller: logemail,
-                        style: TextStyle(color: Colors.white),
+                        style: const TextStyle(color: Colors.white),
                         decoration: InputDecoration(
                           labelText: 'User Name',
-                          labelStyle: TextStyle(
+                          labelStyle: const TextStyle(
                             color: Colors.white,
                           ),
-                          hintText: 'user123@gmail.com',
-                          hintStyle: TextStyle(color: Colors.white),
+                          hintText: 'abc@gmail.com',
+                          hintStyle: const TextStyle(color: Colors.white),
                           focusedBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(15),
-                            borderSide: BorderSide(
+                            borderSide: const BorderSide(
                               color: Colors.white,
                             ),
                           ),
                           enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(15),
-                            borderSide: BorderSide(
+                            borderSide: const BorderSide(
                               color: Colors.white,
                             ),
                           ),
@@ -189,28 +186,42 @@ class _loginState extends State<login> {
                       ),
                     ),
                     Container(
-                      margin: EdgeInsets.only(top: 4, left: 10, right: 10),
-                      padding: EdgeInsets.all(10),
+                      margin:
+                          const EdgeInsets.only(top: 4, left: 10, right: 10),
+                      padding: const EdgeInsets.all(10),
                       child: TextFormField(
                         controller: pass,
-                        obscureText: true,
-                        style: TextStyle(color: Colors.white),
+                        obscureText: _isObscure,
+                        style: const TextStyle(color: Colors.white),
                         decoration: InputDecoration(
                           labelText: 'Password',
-                          labelStyle: TextStyle(
+                          labelStyle: const TextStyle(
                             color: Colors.white,
                           ),
+                          suffixIcon: IconButton(
+                            onPressed: () {
+                              setState(() {
+                                _isObscure = !_isObscure;
+                              });
+                            },
+                            icon: Icon(
+                              _isObscure
+                                  ? Icons.visibility
+                                  : Icons.visibility_off,
+                              color: Colors.white,
+                            ),
+                          ),
                           hintText: '****',
-                          hintStyle: TextStyle(color: Colors.white),
+                          hintStyle: const TextStyle(color: Colors.white),
                           focusedBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(15),
-                            borderSide: BorderSide(
+                            borderSide: const BorderSide(
                               color: Colors.white,
                             ),
                           ),
                           enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(15),
-                            borderSide: BorderSide(
+                            borderSide: const BorderSide(
                               color: Colors.white,
                             ),
                           ),
@@ -316,8 +327,8 @@ class _loginState extends State<login> {
                             child: Row(
                               // ignore: prefer_const_literals_to_create_immutables
                               children: [
-                                Padding(
-                                  padding: const EdgeInsets.only(left: 1),
+                                const Padding(
+                                  padding: EdgeInsets.only(left: 1),
                                   child: Text(
                                     "Do not have Account?",
                                     style: TextStyle(
@@ -326,10 +337,11 @@ class _loginState extends State<login> {
                                     ),
                                   ),
                                 ),
-                                Spacer(),
-                                Padding(
-                                  padding: const EdgeInsets.only(left: 6),
-                                  child: Text(
+                                const Spacer(),
+                                const Padding(
+                                  padding: EdgeInsets.only(left: 6),
+                                  // ignore: unnecessary_const
+                                  child: const Text(
                                     "Signup",
                                     style: TextStyle(
                                       color: Colors.white,

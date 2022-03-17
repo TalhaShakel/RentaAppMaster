@@ -102,6 +102,7 @@ registerfirebase() async {
         backgroundColor: Colors.red,
         textColor: Colors.white,
         fontSize: 16.0);
+
     // } on FirebaseAuthException catch (e) {
     //   if (e.code == 'weak-password') {
     //     print('The password provided is too weak.');
@@ -422,7 +423,13 @@ class _registerState extends State<register> {
                 child: Container(
                   child: ButtonWidget(
                     onClick: () async {
-                      registerfirebase();
+                      try {
+                        registerfirebase();
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) => login()));
+                      } catch (e) {
+                        print(e);
+                      }
                     },
                     //MaterialPageRoute(builder: (context) => Showroom()));
 

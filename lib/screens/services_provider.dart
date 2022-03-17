@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:renta/screens/Profile.dart';
 import 'package:renta/screens/login.dart';
 import 'package:renta/screens/splash_page.dart';
 import 'package:renta/widgets/slider.dart';
@@ -154,7 +155,7 @@ class _ServicesProviderState extends State<ServicesProvider> {
       print(h.toString());
 
       for (int i = 0; i < ssd.length; i++) {
-        if (ssd[i]['category'] == "luxury") {
+        if (ssd[i]['category'] == "hatchbag") {
           list3.add({
             'id': ssd[i]['_id'],
             'modal': ssd[i]['model'],
@@ -220,72 +221,150 @@ class _ServicesProviderState extends State<ServicesProvider> {
     return DefaultTabController(
       length: 4,
       child: Scaffold(
-        drawer: Drawer(
+        drawer: const Drawer(
           child: Main_Drawer(),
         ),
         appBar: AppBar(
           backgroundColor: orangeColors,
-          iconTheme: IconThemeData(
+          title: Text("Renta"),
+          iconTheme: const IconThemeData(
             color: Colors.white,
           ),
         ),
-        body: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(top: 20.0),
-              child: Container(
-                height: 300,
-                color: Colors.black,
-                child: ComplicatedImageDemo(),
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(top: 20.0),
+                child: Container(
+                  height: 200,
+                  // color: Colors.black,
+                  child: ComplicatedImageDemo(),
+                ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Container(
-                color: Colors.black,
-                child: TabBar(
-                    indicator: BoxDecoration(color: orangeColors),
-                    tabs: [
-                      Tab(
-                        text: 'Sedan',
-                      ),
-                      Tab(
-                        text: 'SUV',
-                      ),
-                      Tab(
-                        text: 'Hatchbag',
-                      ),
-                      Tab(
-                        text: 'Luxury',
-                      )
-                    ]),
-              ),
-            ),
-            Container(
-              height: 300,
-              // color: Colors.amber,
-              child: TabBarView(children: [
-                SingleChildScrollView(
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const profile()),
+                  );
+                },
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 16, right: 16, left: 16),
                   child: Container(
-                    // color: Colors.amber,
-                    height: heightScreen * 0.3,
-                    width: widthScreen,
-                    child: list.isNotEmpty
-                        ? ListView.builder(
-                            shrinkWrap: true,
-                            scrollDirection: Axis.horizontal,
-                            itemCount: list.length,
-                            itemBuilder: (BuildContext context, int index) {
-                              return Container(
-                                // color: Colors.amber,
-                                height: heightScreen * 0.14,
-                                width: widthScreen * 0.5,
-                                child: InkWell(
-                                  onTap: () {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) => Single(
+                    decoration: const BoxDecoration(
+                      color: Color(0xFF1B6A65),
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(15),
+                      ),
+                    ),
+                    padding: const EdgeInsets.all(24),
+                    height: 100,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          // ignore: prefer_const_literals_to_create_immutables
+                          children: [
+                            const Text(
+                              "Chalo Renta Kro!",
+                              style: TextStyle(
+                                fontSize: 22,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                              ),
+                            ),
+                            const Text(
+                              "Pakistan First Car Rental Service App",
+                              style: TextStyle(
+                                fontSize: 16,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ],
+                        ),
+                        Container(
+                          decoration: const BoxDecoration(
+                            color: Color(0xFF1B6A65),
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(15),
+                            ),
+                          ),
+                          height: 50,
+                          width: 50,
+                          child: const Center(
+                            child: Icon(
+                              Icons.arrow_forward_ios,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Container(
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.all(
+                          Radius.circular(10.0)), // Set rounded corner radius
+
+                      border: Border.all(
+                        color: Color(0xFF1B6A65),
+                        width: 2,
+                      )),
+                  // color: Color(0xFF1B6A65),
+                  child: TabBar(
+                      labelColor: Colors.white,
+                      unselectedLabelColor: Colors.grey,
+                      indicator: BoxDecoration(
+                        color: Color(0xFF1B6A65),
+                      ),
+                      tabs: [
+                        const Tab(
+                          text: 'Sedan',
+                        ),
+                        const Tab(
+                          text: 'Luxury',
+                        ),
+                        const Tab(
+                          text: 'SUV',
+                        ),
+                        const Tab(
+                          text: 'hatchbag',
+                        )
+                      ]),
+                ),
+              ),
+              Container(
+                height: 300,
+                // color: Colors.amber,
+                child: TabBarView(children: [
+                  SingleChildScrollView(
+                    child: Container(
+                      // color: Colors.amber,
+                      height: heightScreen * 0.3,
+                      width: widthScreen,
+                      child: list.isNotEmpty
+                          ? ListView.builder(
+                              shrinkWrap: true,
+                              scrollDirection: Axis.horizontal,
+                              itemCount: list.length,
+                              itemBuilder: (BuildContext context, int index) {
+                                return Container(
+                                  // color: Colors.amber,
+                                  height: heightScreen * 0.15,
+                                  width: widthScreen * 0.5,
+                                  child: InkWell(
+                                    onTap: () {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) => Single(
                                                   id: list[index]['id'],
                                                   image: list[index]['image'],
                                                   carName: list[index]
@@ -293,93 +372,95 @@ class _ServicesProviderState extends State<ServicesProvider> {
                                                   model: list[index]['modal'],
                                                   color: list[index]['color'],
                                                   pack: list[index]["packages"],
+                                                  category: list[index]
+                                                      ['category']
                                                   // serviceName: list[index]
                                                   //     ['service_name'],
-                                                )));
-                                  },
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Card(
-                                      color: Colors.white,
-                                      elevation: 5.0,
-                                      shadowColor: Colors.grey[600],
-                                      child: Padding(
-                                        padding: const EdgeInsets.symmetric(
-                                            horizontal: 1),
-                                        child: SingleChildScrollView(
-                                          child: Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.end,
-                                            children: [
-                                              Center(
-                                                child: Image.network(
-                                                  "${list[index]['image']}",
-                                                  width: widthScreen * 0.4,
+                                                  )));
+                                    },
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Container(
+                                        // color: Colors.white,
+                                        // elevation: 5.0,
+                                        // shadowColor: Colors.grey[600],
+                                        child: Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 1),
+                                          child: SingleChildScrollView(
+                                            child: Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.end,
+                                              children: [
+                                                Center(
+                                                  child: Image.network(
+                                                    "${list[index]['image']}",
+                                                    width: widthScreen * 0.4,
+                                                  ),
                                                 ),
-                                              ),
-                                              Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                // mainAxisAlignment: MainAxisAlignment.start,
-                                                children: [
-                                                  Text(
-                                                    list[index]['modal'],
-                                                    style: TextStyle(
-                                                        fontSize: 20,
-                                                        fontWeight:
-                                                            FontWeight.bold),
-                                                  ),
-                                                  // Text(
-                                                  //   list[index]['weekly'],
-                                                  //   style: TextStyle(
-                                                  //       fontSize: 20,
-                                                  //       fontWeight: FontWeight.bold),
-                                                  // ),
-                                                  Text(
-                                                    list[index]['carName'],
-                                                    textAlign: TextAlign.left,
-                                                    style: TextStyle(
-                                                        fontSize: 20,
-                                                        fontWeight:
-                                                            FontWeight.bold),
-                                                  ),
-                                                ],
-                                              ),
-                                            ],
+                                                Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  // mainAxisAlignment: MainAxisAlignment.start,
+                                                  children: [
+                                                    Text(
+                                                      list[index]['modal'],
+                                                      style: const TextStyle(
+                                                          fontSize: 20,
+                                                          fontWeight:
+                                                              FontWeight.bold),
+                                                    ),
+                                                    // Text(
+                                                    //   list[index]['weekly'],
+                                                    //   style: TextStyle(
+                                                    //       fontSize: 20,
+                                                    //       fontWeight: FontWeight.bold),
+                                                    // ),
+                                                    Text(
+                                                      list[index]['carName'],
+                                                      textAlign: TextAlign.left,
+                                                      style: const TextStyle(
+                                                          fontSize: 20,
+                                                          fontWeight:
+                                                              FontWeight.bold),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ],
+                                            ),
                                           ),
                                         ),
                                       ),
                                     ),
                                   ),
-                                ),
-                              );
-                            })
-                        : Center(child: CircularProgressIndicator()),
+                                );
+                              })
+                          : const Center(child: CircularProgressIndicator()),
+                    ),
                   ),
-                ),
 
-// page2
-                SingleChildScrollView(
-                  child: Container(
-                    // color: Colors.amber,
-                    height: heightScreen * 0.3,
-                    width: widthScreen,
-                    child: list1.isNotEmpty
-                        ? ListView.builder(
-                            shrinkWrap: true,
-                            scrollDirection: Axis.horizontal,
-                            itemCount: list1.length,
-                            itemBuilder: (BuildContext context, int index) {
-                              return Container(
-                                // color: Colors.amber,
-                                height: heightScreen * 0.14,
-                                width: widthScreen * 0.5,
-                                child: InkWell(
-                                  onTap: () {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) => Single(
+                  // page2
+                  SingleChildScrollView(
+                    child: Container(
+                      // color: Colors.amber,
+                      height: heightScreen * 0.3,
+                      width: widthScreen,
+                      child: list1.isNotEmpty
+                          ? ListView.builder(
+                              shrinkWrap: true,
+                              scrollDirection: Axis.horizontal,
+                              itemCount: list1.length,
+                              itemBuilder: (BuildContext context, int index) {
+                                return Container(
+                                  // color: Colors.amber,
+                                  height: heightScreen * 0.14,
+                                  width: widthScreen * 0.5,
+                                  child: InkWell(
+                                    onTap: () {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) => Single(
                                                   id: list1[index]['id'],
                                                   image: list1[index]['image'],
                                                   carName: list1[index]
@@ -388,93 +469,96 @@ class _ServicesProviderState extends State<ServicesProvider> {
                                                   color: list1[index]['color'],
                                                   pack: list1[index]
                                                       ["packages"],
+                                                  category: list1[index]
+                                                      ['category']
+
                                                   // serviceName: list[index]
                                                   //     ['service_name'],
-                                                )));
-                                  },
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Card(
-                                      color: Colors.white,
-                                      elevation: 5.0,
-                                      shadowColor: Colors.grey[600],
-                                      child: Padding(
-                                        padding: const EdgeInsets.symmetric(
-                                            horizontal: 1),
-                                        child: SingleChildScrollView(
-                                          child: Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.end,
-                                            children: [
-                                              Center(
-                                                child: Image.network(
-                                                  "${list1[index]['image']}",
-                                                  width: widthScreen * 0.4,
+                                                  )));
+                                    },
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Container(
+                                        // color: Colors.white,
+                                        // elevation: 5.0,
+                                        // shadowColor: Colors.grey[600],
+                                        child: Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 1),
+                                          child: SingleChildScrollView(
+                                            child: Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.end,
+                                              children: [
+                                                Center(
+                                                  child: Image.network(
+                                                    "${list1[index]['image']}",
+                                                    width: widthScreen * 0.4,
+                                                  ),
                                                 ),
-                                              ),
-                                              Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                // mainAxisAlignment: MainAxisAlignment.start,
-                                                children: [
-                                                  Text(
-                                                    list1[index]['modal'],
-                                                    style: TextStyle(
-                                                        fontSize: 20,
-                                                        fontWeight:
-                                                            FontWeight.bold),
-                                                  ),
-                                                  // Text(
-                                                  //   list[index]['weekly'],
-                                                  //   style: TextStyle(
-                                                  //       fontSize: 20,
-                                                  //       fontWeight: FontWeight.bold),
-                                                  // ),
-                                                  Text(
-                                                    list1[index]['carName'],
-                                                    textAlign: TextAlign.left,
-                                                    style: TextStyle(
-                                                        fontSize: 20,
-                                                        fontWeight:
-                                                            FontWeight.bold),
-                                                  ),
-                                                ],
-                                              ),
-                                            ],
+                                                Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  // mainAxisAlignment: MainAxisAlignment.start,
+                                                  children: [
+                                                    Text(
+                                                      list1[index]['modal'],
+                                                      style: const TextStyle(
+                                                          fontSize: 20,
+                                                          fontWeight:
+                                                              FontWeight.bold),
+                                                    ),
+                                                    // Text(
+                                                    //   list[index]['weekly'],
+                                                    //   style: TextStyle(
+                                                    //       fontSize: 20,
+                                                    //       fontWeight: FontWeight.bold),
+                                                    // ),
+                                                    Text(
+                                                      list1[index]['carName'],
+                                                      textAlign: TextAlign.left,
+                                                      style: const TextStyle(
+                                                          fontSize: 20,
+                                                          fontWeight:
+                                                              FontWeight.bold),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ],
+                                            ),
                                           ),
                                         ),
                                       ),
                                     ),
                                   ),
-                                ),
-                              );
-                            })
-                        : Center(child: CircularProgressIndicator()),
+                                );
+                              })
+                          : const Center(child: CircularProgressIndicator()),
+                    ),
                   ),
-                ),
 
-                // page 3
-                SingleChildScrollView(
-                  child: Container(
-                    // color: Colors.amber,
-                    height: heightScreen * 0.3,
-                    width: widthScreen,
-                    child: list2.isNotEmpty
-                        ? ListView.builder(
-                            shrinkWrap: true,
-                            scrollDirection: Axis.horizontal,
-                            itemCount: list2.length,
-                            itemBuilder: (BuildContext context, int index) {
-                              return Container(
-                                // color: Colors.amber,
-                                height: heightScreen * 0.14,
-                                width: widthScreen * 0.5,
-                                child: InkWell(
-                                  onTap: () {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) => Single(
+                  // page 3
+                  SingleChildScrollView(
+                    child: Container(
+                      // color: Colors.amber,
+                      height: heightScreen * 0.3,
+                      width: widthScreen,
+                      child: list2.isNotEmpty
+                          ? ListView.builder(
+                              shrinkWrap: true,
+                              scrollDirection: Axis.horizontal,
+                              itemCount: list2.length,
+                              itemBuilder: (BuildContext context, int index) {
+                                return Container(
+                                  // color: Colors.amber,
+                                  height: heightScreen * 0.14,
+                                  width: widthScreen * 0.5,
+                                  child: InkWell(
+                                    onTap: () {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) => Single(
                                                   id: list2[index]['id'],
                                                   image: list2[index]['image'],
                                                   carName: list2[index]
@@ -483,93 +567,95 @@ class _ServicesProviderState extends State<ServicesProvider> {
                                                   color: list2[index]['color'],
                                                   pack: list2[index]
                                                       ["packages"],
+                                                  category: list2[index]
+                                                      ['category']
                                                   // serviceName: list[index]
                                                   //     ['service_name'],
-                                                )));
-                                  },
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Card(
-                                      color: Colors.white,
-                                      elevation: 5.0,
-                                      shadowColor: Colors.grey[600],
-                                      child: Padding(
-                                        padding: const EdgeInsets.symmetric(
-                                            horizontal: 1),
-                                        child: SingleChildScrollView(
-                                          child: Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.end,
-                                            children: [
-                                              Center(
-                                                child: Image.network(
-                                                  "${list2[index]['image']}",
-                                                  width: widthScreen * 0.4,
+                                                  )));
+                                    },
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Card(
+                                        color: Colors.white,
+                                        elevation: 5.0,
+                                        shadowColor: Colors.grey[600],
+                                        child: Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 1),
+                                          child: SingleChildScrollView(
+                                            child: Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.end,
+                                              children: [
+                                                Center(
+                                                  child: Image.network(
+                                                    "${list2[index]['image']}",
+                                                    width: widthScreen * 0.4,
+                                                  ),
                                                 ),
-                                              ),
-                                              Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                // mainAxisAlignment: MainAxisAlignment.start,
-                                                children: [
-                                                  Text(
-                                                    list2[index]['modal'],
-                                                    style: TextStyle(
-                                                        fontSize: 20,
-                                                        fontWeight:
-                                                            FontWeight.bold),
-                                                  ),
-                                                  // Text(
-                                                  //   list[index]['weekly'],
-                                                  //   style: TextStyle(
-                                                  //       fontSize: 20,
-                                                  //       fontWeight: FontWeight.bold),
-                                                  // ),
-                                                  Text(
-                                                    list2[index]['carName'],
-                                                    textAlign: TextAlign.left,
-                                                    style: TextStyle(
-                                                        fontSize: 20,
-                                                        fontWeight:
-                                                            FontWeight.bold),
-                                                  ),
-                                                ],
-                                              ),
-                                            ],
+                                                Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  // mainAxisAlignment: MainAxisAlignment.start,
+                                                  children: [
+                                                    Text(
+                                                      list2[index]['modal'],
+                                                      style: const TextStyle(
+                                                          fontSize: 20,
+                                                          fontWeight:
+                                                              FontWeight.bold),
+                                                    ),
+                                                    // Text(
+                                                    //   list[index]['weekly'],
+                                                    //   style: TextStyle(
+                                                    //       fontSize: 20,
+                                                    //       fontWeight: FontWeight.bold),
+                                                    // ),
+                                                    Text(
+                                                      list2[index]['carName'],
+                                                      textAlign: TextAlign.left,
+                                                      style: const TextStyle(
+                                                          fontSize: 20,
+                                                          fontWeight:
+                                                              FontWeight.bold),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ],
+                                            ),
                                           ),
                                         ),
                                       ),
                                     ),
                                   ),
-                                ),
-                              );
-                            })
-                        : Center(child: CircularProgressIndicator()),
+                                );
+                              })
+                          : const Center(child: CircularProgressIndicator()),
+                    ),
                   ),
-                ),
 
-                // page4
-                SingleChildScrollView(
-                  child: Container(
-                    // color: Colors.amber,
-                    height: heightScreen * 0.3,
-                    width: widthScreen,
-                    child: list3.isNotEmpty
-                        ? ListView.builder(
-                            shrinkWrap: true,
-                            scrollDirection: Axis.horizontal,
-                            itemCount: list3.length,
-                            itemBuilder: (BuildContext context, int index) {
-                              return Container(
-                                // color: Colors.amber,
-                                height: heightScreen * 0.14,
-                                width: widthScreen * 0.5,
-                                child: InkWell(
-                                  onTap: () {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) => Single(
+                  // page4
+                  SingleChildScrollView(
+                    child: Container(
+                      // color: Colors.amber,
+                      height: heightScreen * 0.3,
+                      width: widthScreen,
+                      child: list3.isNotEmpty
+                          ? ListView.builder(
+                              shrinkWrap: true,
+                              scrollDirection: Axis.horizontal,
+                              itemCount: list3.length,
+                              itemBuilder: (BuildContext context, int index) {
+                                return Container(
+                                  // color: Colors.amber,
+                                  height: heightScreen * 0.14,
+                                  width: widthScreen * 0.5,
+                                  child: InkWell(
+                                    onTap: () {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) => Single(
                                                   id: list3[index]['id'],
                                                   image: list3[index]['image'],
                                                   carName: list3[index]
@@ -578,73 +664,76 @@ class _ServicesProviderState extends State<ServicesProvider> {
                                                   color: list3[index]['color'],
                                                   pack: list3[index]
                                                       ["packages"],
+                                                  category: list3[index]
+                                                      ['category']
                                                   // serviceName: list[index]
                                                   //     ['service_name'],
-                                                )));
-                                  },
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Card(
-                                      color: Colors.white,
-                                      elevation: 5.0,
-                                      shadowColor: Colors.grey[600],
-                                      child: Padding(
-                                        padding: const EdgeInsets.symmetric(
-                                            horizontal: 1),
-                                        child: SingleChildScrollView(
-                                          child: Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.end,
-                                            children: [
-                                              Center(
-                                                child: Image.network(
-                                                  "${list3[index]['image']}",
-                                                  width: widthScreen * 0.4,
+                                                  )));
+                                    },
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Card(
+                                        color: Colors.white,
+                                        elevation: 5.0,
+                                        shadowColor: Colors.grey[600],
+                                        child: Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 1),
+                                          child: SingleChildScrollView(
+                                            child: Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.end,
+                                              children: [
+                                                Center(
+                                                  child: Image.network(
+                                                    "${list3[index]['image']}",
+                                                    width: widthScreen * 0.4,
+                                                  ),
                                                 ),
-                                              ),
-                                              Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                // mainAxisAlignment: MainAxisAlignment.start,
-                                                children: [
-                                                  Text(
-                                                    list3[index]['modal'],
-                                                    style: TextStyle(
-                                                        fontSize: 20,
-                                                        fontWeight:
-                                                            FontWeight.bold),
-                                                  ),
-                                                  // Text(
-                                                  //   list[index]['weekly'],
-                                                  //   style: TextStyle(
-                                                  //       fontSize: 20,
-                                                  //       fontWeight: FontWeight.bold),
-                                                  // ),
-                                                  Text(
-                                                    list3[index]['carName'],
-                                                    textAlign: TextAlign.left,
-                                                    style: TextStyle(
-                                                        fontSize: 20,
-                                                        fontWeight:
-                                                            FontWeight.bold),
-                                                  ),
-                                                ],
-                                              ),
-                                            ],
+                                                Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  // mainAxisAlignment: MainAxisAlignment.start,
+                                                  children: [
+                                                    Text(
+                                                      list3[index]['modal'],
+                                                      style: const TextStyle(
+                                                          fontSize: 20,
+                                                          fontWeight:
+                                                              FontWeight.bold),
+                                                    ),
+                                                    // Text(
+                                                    //   list[index]['weekly'],
+                                                    //   style: TextStyle(
+                                                    //       fontSize: 20,
+                                                    //       fontWeight: FontWeight.bold),
+                                                    // ),
+                                                    Text(
+                                                      list3[index]['carName'],
+                                                      textAlign: TextAlign.left,
+                                                      style: const TextStyle(
+                                                          fontSize: 20,
+                                                          fontWeight:
+                                                              FontWeight.bold),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ],
+                                            ),
                                           ),
                                         ),
                                       ),
                                     ),
                                   ),
-                                ),
-                              );
-                            })
-                        : Center(child: CircularProgressIndicator()),
+                                );
+                              })
+                          : const Center(child: CircularProgressIndicator()),
+                    ),
                   ),
-                ),
-              ]),
-            )
-          ],
+                ]),
+              )
+            ],
+          ),
         ),
 
         // SingleChildScrollView(

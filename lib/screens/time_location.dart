@@ -46,39 +46,14 @@ class _Time_locationState extends State<Time_location> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color(0xFF1B6A65),
-        title: Text("Select your Delivery Time and Location"),
+        title: Text("Pickup Details"),
       ),
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
         child: Column(
           children: [
             SizedBox(height: 10),
-            Text("$selectedDate".split(' ')[0], style: TextStyle(fontSize: 24)),
-            Divider(),
-            CalendarDatePicker(
-                initialDate: selectedDate,
-                firstDate: firstDate,
-                lastDate: lastDate,
-                onDateChanged: (newData) {
-                  setState(() {
-                    selectedDate = newData;
-                  });
-                }),
-            Divider(),
-            Container(
-              height: 200,
-              child: CupertinoDatePicker(
-                  mode: CupertinoDatePickerMode.time,
-                  initialDateTime: selectedDate,
-                  minimumDate: firstDate,
-                  maximumDate: lastDate,
-                  onDateTimeChanged: (newDate) {
-                    setState(() {
-                      selectedDate = newDate;
-                    });
-                  }),
-            ),
-            Container(
+               Container(
               decoration: BoxDecoration(
                 color: Colors.grey[100],
                 borderRadius: const BorderRadius.only(
@@ -107,7 +82,7 @@ class _Time_locationState extends State<Time_location> {
                         // ignore: unnecessary_const
                         decoration: const InputDecoration(
                           icon: Icon(
-                            Icons.person,
+                            Icons.search,
                             color: Color(0xFF1B6A65),
                           ),
                           hintText: "Enter your pickup location",
@@ -117,6 +92,30 @@ class _Time_locationState extends State<Time_location> {
                       )),
                 ],
               ),
+            ),
+            
+            CalendarDatePicker(
+                initialDate: selectedDate,
+                firstDate: firstDate,
+                lastDate: lastDate,
+                onDateChanged: (newData) {
+                  setState(() {
+                    selectedDate = newData;
+                  });
+                }),
+            Divider(),
+            Container(
+              height: 200,
+              child: CupertinoDatePicker(
+                  mode: CupertinoDatePickerMode.time,
+                  initialDateTime: selectedDate,
+                  minimumDate: firstDate,
+                  maximumDate: lastDate,
+                  onDateTimeChanged: (newDate) {
+                    setState(() {
+                      selectedDate = newDate;
+                    });
+                  }),
             ),
             Padding(
               padding: const EdgeInsets.all(18.0),

@@ -8,10 +8,11 @@ import 'package:renta/screens/splash_page.dart';
 import 'package:renta/screens/time_location.dart';
 
 class Single extends StatelessWidget {
-  var id, model, color, carName, image, serviceName, pack;
+  var id, model, color, carName, image, serviceName, pack, category;
 
   Single(
-      {this.id,
+      {this.category,
+      this.id,
       this.model,
       this.color,
       this.carName,
@@ -26,34 +27,35 @@ class Single extends StatelessWidget {
         child: Scaffold(
       body: Container(
         height: MediaQuery.of(context).size.height,
-        color: Colors.white,
+        color: Colors.grey[100],
         child: SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Container(
-                decoration: BoxDecoration(
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black,
-                        blurRadius: 2.0,
-                        spreadRadius: 0.0,
-                        offset:
-                            Offset(2.0, 2.0), // shadow direction: bottom right
-                      )
-                    ],
+                decoration: const BoxDecoration(
+                    // boxShadow: [
+                    //   BoxShadow(
+                    //     color: Colors.black,
+                    //     blurRadius: 10.0,
+                    //     spreadRadius: 0.0,
+                    //     offset:
+                    //         Offset(2.0, 2.0), // shadow direction: bottom right
+                    //   )
+                    // ],
                     color: Colors.white,
                     borderRadius: BorderRadius.only(
-                      bottomRight: Radius.circular(25),
-                      bottomLeft: Radius.circular(25),
+                      bottomRight: Radius.circular(35),
+                      bottomLeft: Radius.circular(35),
                     )),
                 child: Column(
                   children: [
                     Container(
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                             // color: Colors.black26,
                             ),
-                        padding: const EdgeInsets.symmetric(horizontal: 16),
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 10, horizontal: 16),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -121,76 +123,93 @@ class Single extends StatelessWidget {
                           ],
                         )),
                     Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Center(
-                        child: Image.network(
-                          image.toString(),
-                          height: MediaQuery.of(context).size.height * 0.3,
-                          fit: BoxFit.contain,
-                          // height: 11,
-                        ),
-                        // ),
+                      padding: EdgeInsets.only(
+                          top: 18.0,
+                          left: 10,
+                          right: MediaQuery.of(context).size.width / 2),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(carName.toString(),
+                              textAlign: TextAlign.left,
+                              style: const TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 35)),
+                          Text(category.toString(),
+                              textAlign: TextAlign.left,
+                              style: const TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 25)),
+                        ],
                       ),
                     ),
-                    Container(
-                      child: Padding(
-                        padding: const EdgeInsets.only(right: 20.0, top: 7.0),
-                        child: Padding(
-                          padding: const EdgeInsets.only(top: 18.0),
-                          child: Center(
-                            child: Text(carName,
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold, fontSize: 35)),
-                          ),
-                        ),
+                    Center(
+                      child: Image.network(
+                        image.toString(),
+                        height: MediaQuery.of(context).size.height * 0.3,
+                        fit: BoxFit.contain,
+                        // height: 11,
                       ),
+                      // ),
                     ),
                   ],
                 ),
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 18.0, bottom: 18),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    buildPricePerPeriod(
-                      context,
-                      "hours 5",
-                      "${pack[0]["hours5"]} PKR",
-                    ),
-                    buildPricePerPeriod(
-                      context,
-                      "hours 10",
-                      "${pack[0]["hours10"]} PKR",
-                    ),
-                    buildPricePerPeriod(
-                      context,
-                      "hours 24",
-                      "${pack[0]["hours24"]} PKR",
-                    ),
-                  ],
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    // crossAxisAl,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      buildPricePerPeriod(
+                        context,
+                        "hours 5",
+                        "${pack[0]["hours5"]} PKR",
+                      ),
+                      buildPricePerPeriod(
+                        context,
+                        "hours 10",
+                        "${pack[0]["hours10"]} PKR",
+                      ),
+                      buildPricePerPeriod(
+                        context,
+                        "hours 24",
+                        "${pack[0]["hours24"]} PKR",
+                      ),
+                      buildPricePerPeriod(
+                        context,
+                        "out Of City",
+                        "${pack[0]["outOfCity"]} PKR",
+                      ),
+                      buildPricePerPeriod(
+                        context,
+                        "weekly",
+                        "${pack[0]["weekly"]} PKR",
+                      ),
+                      buildPricePerPeriod(
+                        context,
+                        "monthly",
+                        "${pack[0]["monthly"]} PKR",
+                      ),
+                    ],
+                  ),
                 ),
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  buildPricePerPeriod(
-                    context,
-                    "out Of City",
-                    "${pack[0]["outOfCity"]} PKR",
+                  Padding(
+                padding: const EdgeInsets.only(top: 18.0, bottom: 18),
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    // crossAxisAl,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                       buildSpecificationCar("Color", "White"),
+                        buildSpecificationCar("Condition", "10/10"),
+                       buildSpecificationCar("Gearbox", "Automatic"),                          
+                    ],
                   ),
-                  buildPricePerPeriod(
-                    context,
-                    "weekly",
-                    "${pack[0]["weekly"]} PKR",
-                  ),
-                  buildPricePerPeriod(
-                    context,
-                    "monthly",
-                    "${pack[0]["monthly"]} PKR",
-                  ),
-                ],
-              ),
+                ),
+              ),     
               Padding(
                 padding: const EdgeInsets.only(top: 8.0),
                 child: GestureDetector(
@@ -221,9 +240,9 @@ class Single extends StatelessWidget {
                           child: RichText(
                             text: TextSpan(
                               children: [
-                                TextSpan(
-                                  text: 'Place Order',
-                                  style: const TextStyle(
+                                const TextSpan(
+                                  text: 'Book this Car',
+                                  style: TextStyle(
                                       fontSize: 18, color: Colors.white),
                                   // recognizer: TapGestureRecognizer()
                                   // onTap = () {
@@ -238,7 +257,7 @@ class Single extends StatelessWidget {
                   ),
                 ),
               ),
-            ],
+            ],    
           ),
           //   C
         ),
@@ -254,75 +273,123 @@ class Single extends StatelessWidget {
     String months,
     String price,
   ) {
-    return GestureDetector(
-      onTap: () {
-        // selected = false;
-        daysss = months;
-        print("This package is selected: $daysss");
-        pricefinal = price;
-        print("Package is selected $pricefinal");
-        Fluttertoast.showToast(
-            msg: "Package is selected $daysss \n $pricefinal",
-            toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.CENTER,
-            timeInSecForIosWeb: 1,
-            backgroundColor: Colors.red,
-            textColor: Colors.white,
-            fontSize: 16.0);
-      },
-      child: Container(
-        height: MediaQuery.of(context).size.height * 0.1,
-        width: MediaQuery.of(context).size.width * 0.27,
-        padding: const EdgeInsets.all(5),
-        decoration: BoxDecoration(
-          color:
-              // selected ? kPrimaryColor :
-              Colors.white,
-          borderRadius: const BorderRadius.all(
-            const Radius.circular(15),
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: GestureDetector(
+        onTap: () {
+          // selected = false;
+          daysss = months;
+          print("This package is selected: $daysss");
+          pricefinal = price;
+          print("Package is selected $pricefinal");
+          Fluttertoast.showToast(
+              msg: "Package is selected $daysss \n $pricefinal",
+              toastLength: Toast.LENGTH_SHORT,
+              gravity: ToastGravity.CENTER,
+              timeInSecForIosWeb: 2,
+              backgroundColor: Color(0xFF1B6A65),
+              textColor: Colors.white,
+              fontSize: 16.0);
+        },
+        child: Container(
+          height: MediaQuery.of(context).size.height * 0.1,
+          width: MediaQuery.of(context).size.width * 0.27,
+          padding: const EdgeInsets.all(5),
+          decoration: const BoxDecoration(
+            color:
+                // selected ? kPrimaryColor :
+                const Color(0xFF1B6A65),
+            borderRadius: BorderRadius.all(
+              Radius.circular(10),
+            ),
+            // border: Border.all(
+            //     color: Color(0xFF1B6A65),
+            //     // width: selected ? 0 : 1,
+            //     ),
+            // boxShadow: [
+            //   BoxShadow(
+            //     color: Colors.black.withOpacity(0.4),
+            //     spreadRadius: 3,
+            //     blurRadius: 4,
+            //     offset: Offset(0, 3), // changes position of shadow
+            //   ),
+            // ],
           ),
-          border: Border.all(
-              // color: Colors.black,
-              // width: selected ? 0 : 1,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Text(
+                months.toUpperCase(),
+                // ignore: prefer_const_constructors
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  letterSpacing: 1,
+                  color:
+                      // selected ? Colors.white :
+                      Colors.white,
+                  fontSize: 14,
+                  // fontWeight: FontWeight.bold,
+                ),
               ),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withOpacity(0.4),
-              spreadRadius: 3,
-              blurRadius: 4,
-              offset: Offset(0, 3), // changes position of shadow
-            ),
-          ],
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            Text(
-              months.toUpperCase(),
-              style: TextStyle(
-                letterSpacing: 2,
-                color:
-                    // selected ? Colors.white :
-                    Colors.black,
-                fontSize: 17,
-                // fontWeight: FontWeight.bold,
+              Text(
+                price,
+                // ignore: prefer_const_constructors
+                style: TextStyle(
+                  letterSpacing: 1,
+                  color:
+                      // selected ? Colors.white :
+                      Colors.white,
+                  fontSize: 14,
+                  // fontWeight: FontWeight.bold,
+                ),
               ),
-            ),
-            Text(
-              price,
-              style: TextStyle(
-                letterSpacing: 1,
-                color:
-                    // selected ? Colors.white :
-                    Colors.black,
-                fontSize: 16,
-                // fontWeight: FontWeight.bold,
-              ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
   }
 }
+
+ Widget buildSpecificationCar(String title, String data){
+    return Container(
+      width: 130,
+      decoration: const BoxDecoration(
+        color: Colors.white,
+        borderRadius: const BorderRadius.all(
+          const Radius.circular(15),
+        ),
+      ),
+      padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16,),
+      margin: const EdgeInsets.only(right: 16),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+
+          Text(
+            title,
+            style: const TextStyle(
+              color: Colors.grey,
+              fontSize: 14,
+            ),
+          ),
+
+          const SizedBox(
+            height: 8,
+          ),
+
+          Text(
+            data,
+            style: const TextStyle(
+              color: Colors.black,
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+
+        ],
+      ),
+    );
+  }
