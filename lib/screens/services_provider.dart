@@ -33,6 +33,7 @@ class _ServicesProviderState extends State<ServicesProvider> {
     suv();
     luxury();
     hatchbag();
+    curretndata();
     super.initState();
   }
 
@@ -292,7 +293,7 @@ class _ServicesProviderState extends State<ServicesProvider> {
                               Radius.circular(15),
                             ),
                           ),
-                          height: 50,
+                          height: MediaQuery.of(context).size.height * 0.1,
                           width: 50,
                           child: const Center(
                             child: Icon(
@@ -472,16 +473,11 @@ class _ServicesProviderState extends State<ServicesProvider> {
                                                   category: list1[index]
                                                       ['category']
 
-                                                  // serviceName: list[index]
-                                                  //     ['service_name'],
                                                   )));
                                     },
                                     child: Padding(
                                       padding: const EdgeInsets.all(8.0),
                                       child: Container(
-                                        // color: Colors.white,
-                                        // elevation: 5.0,
-                                        // shadowColor: Colors.grey[600],
                                         child: Padding(
                                           padding: const EdgeInsets.symmetric(
                                               horizontal: 1),
@@ -499,7 +495,6 @@ class _ServicesProviderState extends State<ServicesProvider> {
                                                 Column(
                                                   crossAxisAlignment:
                                                       CrossAxisAlignment.start,
-                                                  // mainAxisAlignment: MainAxisAlignment.start,
                                                   children: [
                                                     Text(
                                                       list1[index]['modal'],
@@ -508,12 +503,6 @@ class _ServicesProviderState extends State<ServicesProvider> {
                                                           fontWeight:
                                                               FontWeight.bold),
                                                     ),
-                                                    // Text(
-                                                    //   list[index]['weekly'],
-                                                    //   style: TextStyle(
-                                                    //       fontSize: 20,
-                                                    //       fontWeight: FontWeight.bold),
-                                                    // ),
                                                     Text(
                                                       list1[index]['carName'],
                                                       textAlign: TextAlign.left,
@@ -537,10 +526,8 @@ class _ServicesProviderState extends State<ServicesProvider> {
                     ),
                   ),
 
-                  // page 3
                   SingleChildScrollView(
                     child: Container(
-                      // color: Colors.amber,
                       height: heightScreen * 0.3,
                       width: widthScreen,
                       child: list2.isNotEmpty
@@ -550,7 +537,6 @@ class _ServicesProviderState extends State<ServicesProvider> {
                               itemCount: list2.length,
                               itemBuilder: (BuildContext context, int index) {
                                 return Container(
-                                  // color: Colors.amber,
                                   height: heightScreen * 0.14,
                                   width: widthScreen * 0.5,
                                   child: InkWell(
@@ -569,16 +555,11 @@ class _ServicesProviderState extends State<ServicesProvider> {
                                                       ["packages"],
                                                   category: list2[index]
                                                       ['category']
-                                                  // serviceName: list[index]
-                                                  //     ['service_name'],
                                                   )));
                                     },
                                     child: Padding(
                                       padding: const EdgeInsets.all(8.0),
-                                      child: Card(
-                                        color: Colors.white,
-                                        elevation: 5.0,
-                                        shadowColor: Colors.grey[600],
+                                      child: Container(
                                         child: Padding(
                                           padding: const EdgeInsets.symmetric(
                                               horizontal: 1),
@@ -596,7 +577,6 @@ class _ServicesProviderState extends State<ServicesProvider> {
                                                 Column(
                                                   crossAxisAlignment:
                                                       CrossAxisAlignment.start,
-                                                  // mainAxisAlignment: MainAxisAlignment.start,
                                                   children: [
                                                     Text(
                                                       list2[index]['modal'],
@@ -605,12 +585,6 @@ class _ServicesProviderState extends State<ServicesProvider> {
                                                           fontWeight:
                                                               FontWeight.bold),
                                                     ),
-                                                    // Text(
-                                                    //   list[index]['weekly'],
-                                                    //   style: TextStyle(
-                                                    //       fontSize: 20,
-                                                    //       fontWeight: FontWeight.bold),
-                                                    // ),
                                                     Text(
                                                       list2[index]['carName'],
                                                       textAlign: TextAlign.left,
@@ -647,7 +621,6 @@ class _ServicesProviderState extends State<ServicesProvider> {
                               itemCount: list3.length,
                               itemBuilder: (BuildContext context, int index) {
                                 return Container(
-                                  // color: Colors.amber,
                                   height: heightScreen * 0.14,
                                   width: widthScreen * 0.5,
                                   child: InkWell(
@@ -672,10 +645,9 @@ class _ServicesProviderState extends State<ServicesProvider> {
                                     },
                                     child: Padding(
                                       padding: const EdgeInsets.all(8.0),
-                                      child: Card(
-                                        color: Colors.white,
-                                        elevation: 5.0,
-                                        shadowColor: Colors.grey[600],
+                                      child: Container(
+                                        // elevation: 5.0,
+                                        // shadowColor: Colors.grey[600],
                                         child: Padding(
                                           padding: const EdgeInsets.symmetric(
                                               horizontal: 1),

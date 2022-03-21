@@ -64,73 +64,76 @@ userStore() async {}
 //     print(e.toString());
 //   }
 // }
-registerfirebase() async {
-  FirebaseAuth auth = FirebaseAuth.instance;
-  try {
-    await auth.createUserWithEmailAndPassword(
-        email: emailcontroller.text, password: passwordcontroller.text);
-    FirebaseFirestore db = FirebaseFirestore.instance;
-
-    String? uid = auth.currentUser?.uid;
-
-    try {
-      await db.collection("users").doc(uid).set({
-        "name": fullnamecontroller.text,
-        "email": emailcontroller.text,
-        "phone": phoneNumbercontroller.text,
-        "password": passwordcontroller.text,
-        "repassword": repasswordcontroller.text,
-        "username": usernamecontroller.text,
-      });
-      print("User is register");
-    } catch (e) {
-      print("$uid");
-      Fluttertoast.showToast(
-          msg: "$e",
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.CENTER,
-          timeInSecForIosWeb: 1,
-          backgroundColor: Colors.red,
-          textColor: Colors.white,
-          fontSize: 16.0);
-    }
-    Fluttertoast.showToast(
-        msg: "Register Successfull",
-        toastLength: Toast.LENGTH_SHORT,
-        gravity: ToastGravity.CENTER,
-        timeInSecForIosWeb: 1,
-        backgroundColor: Colors.red,
-        textColor: Colors.white,
-        fontSize: 16.0);
-
-    // } on FirebaseAuthException catch (e) {
-    //   if (e.code == 'weak-password') {
-    //     print('The password provided is too weak.');
-    //   } else if (e.code == 'email-already-in-use') {
-    //     print('The account already exists for that email.');
-    //   }
-  } catch (e) {
-    print("Error $e");
-    Fluttertoast.showToast(
-        msg: "$e",
-        toastLength: Toast.LENGTH_SHORT,
-        gravity: ToastGravity.CENTER,
-        timeInSecForIosWeb: 1,
-        backgroundColor: Colors.red,
-        textColor: Colors.white,
-        fontSize: 16.0);
-  }
-  emailcontroller.clear();
-  passwordcontroller.clear();
-  phoneNumbercontroller.clear();
-  usernamecontroller.clear();
-  repasswordcontroller.clear();
-  fullnamecontroller.clear();
-}
 
 class _registerState extends State<register> {
   @override
   Widget build(BuildContext context) {
+    registerfirebase() async {
+      FirebaseAuth auth = FirebaseAuth.instance;
+      try {
+        await auth.createUserWithEmailAndPassword(
+            email: emailcontroller.text, password: passwordcontroller.text);
+        FirebaseFirestore db = FirebaseFirestore.instance;
+
+        String? uid = auth.currentUser?.uid;
+
+        try {
+          await db.collection("users").doc(uid).set({
+            "name": fullnamecontroller.text,
+            "email": emailcontroller.text,
+            "phone": phoneNumbercontroller.text,
+            "password": passwordcontroller.text,
+            "repassword": repasswordcontroller.text,
+            "username": usernamecontroller.text,
+          });
+          print("User is register");
+        } catch (e) {
+          print("$uid");
+          Fluttertoast.showToast(
+              msg: "$e",
+              toastLength: Toast.LENGTH_SHORT,
+              gravity: ToastGravity.CENTER,
+              timeInSecForIosWeb: 1,
+              backgroundColor: Colors.red,
+              textColor: Colors.white,
+              fontSize: 16.0);
+        }
+        Fluttertoast.showToast(
+            msg: "Register Successfull",
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.CENTER,
+            timeInSecForIosWeb: 1,
+            backgroundColor: Colors.red,
+            textColor: Colors.white,
+            fontSize: 16.0);
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => login()));
+
+        // } on FirebaseAuthException catch (e) {
+        //   if (e.code == 'weak-password') {
+        //     print('The password provided is too weak.');
+        //   } else if (e.code == 'email-already-in-use') {
+        //     print('The account already exists for that email.');
+        //   }
+      } catch (e) {
+        print("Error $e");
+        Fluttertoast.showToast(
+            msg: "$e",
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.CENTER,
+            timeInSecForIosWeb: 1,
+            backgroundColor: Colors.red,
+            textColor: Colors.white,
+            fontSize: 16.0);
+      }
+      emailcontroller.clear();
+      passwordcontroller.clear();
+      phoneNumbercontroller.clear();
+      usernamecontroller.clear();
+      repasswordcontroller.clear();
+      fullnamecontroller.clear();
+    }
+
     return Scaffold(
         appBar: AppBar(
           backgroundColor: orangeColors,
@@ -425,8 +428,6 @@ class _registerState extends State<register> {
                     onClick: () async {
                       try {
                         registerfirebase();
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => login()));
                       } catch (e) {
                         print(e);
                       }

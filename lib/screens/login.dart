@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:renta/components/main_drawer.dart';
+import 'package:renta/screens/forgetpass.dart';
 import 'services_provider.dart';
 import 'register.dart';
 import 'splash_page.dart';
@@ -111,7 +112,7 @@ class _loginState extends State<login> {
             left: 50,
             right: 50,
             child: Container(
-              height: 440,
+              height: 540,
               width: 420,
               decoration: BoxDecoration(
                 gradient: LinearGradient(
@@ -306,6 +307,40 @@ class _loginState extends State<login> {
                         ),
                       ),
                     ),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) => forget()));
+                      },
+                      child: Container(
+                        height: 40,
+                        width: 400,
+                        decoration: BoxDecoration(
+                            gradient: LinearGradient(
+                                colors: [orangeColors, orangeLightColors],
+                                end: Alignment.bottomCenter,
+                                begin: Alignment.topCenter)),
+                        child: Center(
+                          child: Row(
+                            // ignore: prefer_const_literals_to_create_immutables
+                            children: [
+                              const Padding(
+                                padding: EdgeInsets.only(top: 12, left: 6),
+                                // ignore: unnecessary_const
+                                child: const Text(
+                                  "Forget Password",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: GestureDetector(
@@ -316,7 +351,7 @@ class _loginState extends State<login> {
                                   builder: (context) => register()));
                         },
                         child: Container(
-                          height: 20,
+                          height: 60,
                           width: 400,
                           decoration: BoxDecoration(
                               gradient: LinearGradient(
