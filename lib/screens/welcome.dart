@@ -84,27 +84,29 @@ class _SplashPage2State extends State<SplashPage2> {
             //   ),
             //   child:
             SingleChildScrollView(
-          child: Column(
-            children: [
-              Image.asset(
-                "assets/images/welcome.gif",
-                fit: BoxFit.contain,
-                height: MediaQuery.of(context).size.height * 0.8,
-              ),
-              ButtonWidget(
-                btnText: "Get Started",
-                onClick: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => login()));
-                },
-              )
-              // ElevatedButton(
-              //     onPressed: () {
-              //       Navigator.push(context,
-              //           MaterialPageRoute(builder: (context) => LoginPage()));
-              //     },
-              //     child: Text("data"))
-            ],
+          child: SafeArea(
+            child: Column(
+              children: [
+                Image.asset(
+                  "assets/images/welcome.gif",
+                  fit: BoxFit.contain,
+                  height: MediaQuery.of(context).size.height * 0.8,
+                ),
+                ButtonWidget(
+                  btnText: "Get Started",
+                  onClick: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => login()));
+                  },
+                )
+                // ElevatedButton(
+                //     onPressed: () {
+                //       Navigator.push(context,
+                //           MaterialPageRoute(builder: (context) => LoginPage()));
+                //     },
+                //     child: Text("data"))
+              ],
+            ),
           ),
         ));
     // );

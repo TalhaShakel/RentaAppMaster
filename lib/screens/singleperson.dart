@@ -7,7 +7,7 @@ import 'package:http/http.dart' as http;
 import 'package:renta/screens/splash_page.dart';
 import 'package:renta/screens/time_location.dart';
 
-class Single extends StatelessWidget {
+class Single extends StatefulWidget {
   var id, model, color, carName, image, serviceName, pack, category;
 
   Single(
@@ -20,6 +20,11 @@ class Single extends StatelessWidget {
       this.image,
       this.pack});
 
+  @override
+  State<Single> createState() => _SingleState();
+}
+
+class _SingleState extends State<Single> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -72,7 +77,7 @@ class Single extends StatelessWidget {
                                       const Radius.circular(15),
                                     ),
                                     border: Border.all(
-                                      color: Colors.blue,
+                                      color: Color(0xFF1B6A65),
                                       width: 1,
                                     ),
                                   ),
@@ -82,68 +87,35 @@ class Single extends StatelessWidget {
                                     size: 28,
                                   )),
                             ),
-                            Row(
-                              children: [
-                                Container(
-                                    width: 45,
-                                    height: 45,
-                                    decoration: BoxDecoration(
-                                      color: orangeColors,
-                                      borderRadius: const BorderRadius.all(
-                                        const Radius.circular(15),
-                                      ),
-                                    ),
-                                    child: const Icon(
-                                      Icons.bookmark_border,
-                                      color: Colors.white,
-                                      size: 22,
-                                    )),
-                                const SizedBox(
-                                  width: 16,
-                                ),
-                                Container(
-                                    width: 45,
-                                    height: 45,
-                                    decoration: BoxDecoration(
-                                      borderRadius: const BorderRadius.all(
-                                        Radius.circular(15),
-                                      ),
-                                      border: Border.all(
-                                        color: Colors.grey,
-                                        width: 1,
-                                      ),
-                                    ),
-                                    child: const Icon(
-                                      Icons.share,
-                                      color: Colors.black,
-                                      size: 22,
-                                    )),
-                              ],
-                            ),
                           ],
                         )),
                     Padding(
                       padding: EdgeInsets.only(
-                          top: 18.0,
-                          left: 10,
-                          right: MediaQuery.of(context).size.width / 2),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(carName.toString(),
-                              textAlign: TextAlign.left,
-                              style: const TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 35)),
-                          Text(category.toString(),
-                              textAlign: TextAlign.left,
-                              style: const TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 25)),
-                        ],
+                        top: 18.0,
+                        left: 20,
+                        // right: MediaQuery.of(context).size.width * 0.1
+                      ),
+                      child: Container(
+                        alignment: Alignment.bottomLeft,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(widget.carName.toString(),
+                                textAlign: TextAlign.left,
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.bold, fontSize: 35)),
+                            Text(widget.category.toString().toUpperCase(),
+                                textAlign: TextAlign.left,
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.bold, fontSize: 25)),
+                          ],
+                        ),
                       ),
                     ),
                     Center(
                       child: Image.network(
-                        image.toString(),
+                        widget.image.toString(),
                         height: MediaQuery.of(context).size.height * 0.3,
                         fit: BoxFit.contain,
                         // height: 11,
@@ -163,39 +135,26 @@ class Single extends StatelessWidget {
                     children: [
                       buildPricePerPeriod(
                         context,
-                        "hours 5",
-                        "${pack[0]["hours5"]} PKR",
+                        "5 hours",
+                        "${widget.pack[0]["hours5"]} PKR",
+                        "first",
+                        "first",
                       ),
-                      buildPricePerPeriod(
-                        context,
-                        "hours 10",
-                        "${pack[0]["hours10"]} PKR",
-                      ),
-                      buildPricePerPeriod(
-                        context,
-                        "hours 24",
-                        "${pack[0]["hours24"]} PKR",
-                      ),
-                      buildPricePerPeriod(
-                        context,
-                        "out Of City",
-                        "${pack[0]["outOfCity"]} PKR",
-                      ),
-                      buildPricePerPeriod(
-                        context,
-                        "weekly",
-                        "${pack[0]["weekly"]} PKR",
-                      ),
-                      buildPricePerPeriod(
-                        context,
-                        "monthly",
-                        "${pack[0]["monthly"]} PKR",
-                      ),
+                      buildPricePerPeriod(context, "10 hours",
+                          "${widget.pack[0]["hours10"]} PKR", "sec", "sec"),
+                      buildPricePerPeriod(context, "24 hours",
+                          "${widget.pack[0]["hours24"]} PKR", "third", "third"),
+                      buildPricePerPeriod(context, "out Of City",
+                          "${widget.pack[0]["outOfCity"]} PKR", "four", "four"),
+                      buildPricePerPeriod(context, "weekly",
+                          "${widget.pack[0]["weekly"]} PKR", "five", "five"),
+                      buildPricePerPeriod(context, "monthly",
+                          "${widget.pack[0]["monthly"]} PKR", "six", "six"),
                     ],
                   ),
                 ),
               ),
-                  Padding(
+              Padding(
                 padding: const EdgeInsets.only(top: 18.0, bottom: 18),
                 child: SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
@@ -203,13 +162,13 @@ class Single extends StatelessWidget {
                     // crossAxisAl,
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                       buildSpecificationCar("Color", "White"),
-                        buildSpecificationCar("Condition", "10/10"),
-                       buildSpecificationCar("Gearbox", "Automatic"),                          
+                      buildSpecificationCar("Color", "White", false),
+                      buildSpecificationCar("Condition", "10/10", true),
+                      buildSpecificationCar("Gearbox", "Automatic", false),
                     ],
                   ),
                 ),
-              ),     
+              ),
               Padding(
                 padding: const EdgeInsets.only(top: 8.0),
                 child: GestureDetector(
@@ -218,9 +177,9 @@ class Single extends StatelessWidget {
                         context,
                         MaterialPageRoute(
                             builder: (context) => Time_location(
-                                img: image,
+                                img: widget.image,
                                 pack: daysss.toString(),
-                                car1: carName,
+                                car1: widget.carName,
                                 price: pricefinal.toString())));
                   },
                   child: Padding(
@@ -257,7 +216,7 @@ class Single extends StatelessWidget {
                   ),
                 ),
               ),
-            ],    
+            ],
           ),
           //   C
         ),
@@ -267,16 +226,23 @@ class Single extends StatelessWidget {
   }
 
   String pricefinal = "";
+
   String daysss = "";
+  String selected = "";
   Widget buildPricePerPeriod(
     BuildContext context,
     String months,
     String price,
+    String onColor,
+    String klor,
   ) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: GestureDetector(
         onTap: () {
+          setState(() {
+            selected = onColor;
+          });
           // selected = false;
           daysss = months;
           print("This package is selected: $daysss");
@@ -294,11 +260,12 @@ class Single extends StatelessWidget {
         child: Container(
           height: MediaQuery.of(context).size.height * 0.1,
           width: MediaQuery.of(context).size.width * 0.27,
-          padding: const EdgeInsets.all(5),
-          decoration: const BoxDecoration(
-            color:
-                // selected ? kPrimaryColor :
-                const Color(0xFF1B6A65),
+          padding: EdgeInsets.all(5),
+          decoration: BoxDecoration(
+            color: selected == '$klor' ? Color(0xFF1B6A65) : Colors.white,
+            // selected ? kPrimaryColor :
+            //  color:   klor,
+
             borderRadius: BorderRadius.all(
               Radius.circular(10),
             ),
@@ -327,7 +294,7 @@ class Single extends StatelessWidget {
                   letterSpacing: 1,
                   color:
                       // selected ? Colors.white :
-                      Colors.white,
+                      selected == '$klor' ? Colors.white : Colors.black,
                   fontSize: 14,
                   // fontWeight: FontWeight.bold,
                 ),
@@ -339,7 +306,7 @@ class Single extends StatelessWidget {
                   letterSpacing: 1,
                   color:
                       // selected ? Colors.white :
-                      Colors.white,
+                      selected == '$klor' ? Colors.white : Colors.black,
                   fontSize: 14,
                   // fontWeight: FontWeight.bold,
                 ),
@@ -352,22 +319,26 @@ class Single extends StatelessWidget {
   }
 }
 
- Widget buildSpecificationCar(String title, String data){
-    return Container(
-      width: 130,
-      decoration: const BoxDecoration(
-        color: Colors.white,
-        borderRadius: const BorderRadius.all(
-          const Radius.circular(15),
-        ),
+// bool star = false;
+
+Widget buildSpecificationCar(String title, String data, bool star) {
+  return Container(
+    width: 130,
+    decoration: const BoxDecoration(
+      color: Colors.white,
+      borderRadius: const BorderRadius.all(
+        const Radius.circular(15),
       ),
-      padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16,),
-      margin: const EdgeInsets.only(right: 16),
-      child: Column(
+    ),
+    padding: const EdgeInsets.symmetric(
+      vertical: 8,
+      horizontal: 16,
+    ),
+    margin: const EdgeInsets.only(right: 16),
+    child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-
           Text(
             title,
             style: const TextStyle(
@@ -375,11 +346,9 @@ class Single extends StatelessWidget {
               fontSize: 14,
             ),
           ),
-
           const SizedBox(
             height: 8,
           ),
-
           Text(
             data,
             style: const TextStyle(
@@ -388,8 +357,28 @@ class Single extends StatelessWidget {
               fontWeight: FontWeight.bold,
             ),
           ),
-
-        ],
-      ),
-    );
-  }
+          star
+              ? Row(
+                  children: [
+                    Icon(
+                      Icons.star,
+                      color: Colors.yellow,
+                    ),
+                    Icon(
+                      Icons.star,
+                      color: Colors.yellow,
+                    ),
+                    Icon(
+                      Icons.star,
+                      color: Colors.yellow,
+                    ),
+                    Icon(
+                      Icons.star,
+                      color: Colors.yellow,
+                    )
+                  ],
+                )
+              : Text("")
+        ]),
+  );
+}

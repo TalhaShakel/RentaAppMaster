@@ -117,12 +117,11 @@ class ConfirmOrder extends StatelessWidget {
                   ),
                   Container(
                     padding: const EdgeInsets.all(14),
-                    decoration: BoxDecoration(
-                        
-                      ),
+                    decoration: BoxDecoration(),
                     child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text(
+                        Text(
                           "Terms & Conditions",
                           style: TextStyle(
                               fontSize: 18,
@@ -135,7 +134,8 @@ class ConfirmOrder extends StatelessWidget {
 . No High-fares No HiddenCharges.""",
                           textAlign: TextAlign.left,
                           style: const TextStyle(
-                              letterSpacing: 1,),
+                            letterSpacing: 1,
+                          ),
                         ),
                       ],
                     ),
@@ -150,8 +150,9 @@ class ConfirmOrder extends StatelessWidget {
                           //   color: const Color(0xFF1B6A65),
                           //   width: 4,
                           // )
-                        ),
+                          ),
                       child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           const Text(
                             "IMPORTANT NOTE",
@@ -164,11 +165,12 @@ class ConfirmOrder extends StatelessWidget {
                           const Text(
                             """Rental Charges only Valid for Karachi CITY. 
 Add On Charges will be applied for Extra Per Hours
-1-Sedan = 250
+1- Sedan = 250
 2- Hatch Back = 200
 3- Luxury & SUV= 500""",
                             style: const TextStyle(
-                                letterSpacing: 1,),
+                              letterSpacing: 1,
+                            ),
                           ),
                           const Padding(
                             padding: EdgeInsets.only(top: 8.0),
@@ -176,8 +178,8 @@ Add On Charges will be applied for Extra Per Hours
                               "Rental charges are only valid for within Karachi City. Rs.500/HOUR will be charged for an extra hour in HalfDAY Rental Rs.200/HOUR will be charged for an extra hour in FULL-DAY Rental.",
                               textAlign: TextAlign.left,
                               style: TextStyle(
-                                  letterSpacing: 1,
-                                  ),
+                                letterSpacing: 1,
+                              ),
                             ),
                           ),
                         ],
@@ -189,14 +191,15 @@ Add On Charges will be applied for Extra Per Hours
                     child: Container(
                       padding: const EdgeInsets.all(14),
                       decoration: BoxDecoration(
-                          borderRadius: const BorderRadius.all(Radius.circular(10.0)),
-                        
-                        ),
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(10.0)),
+                      ),
                       child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           const Text(
-                          "ORDER SUMMARY",
-                          textAlign: TextAlign.left,
+                            "ORDER SUMMARY",
+                            textAlign: TextAlign.left,
                             style: TextStyle(
                                 fontSize: 18,
                                 letterSpacing: 1,
@@ -208,7 +211,8 @@ Price: ${price.toUpperCase()}
 Delivery Date: ${selectedDate}
 Address: ${address.toUpperCase()} """,
                             style: const TextStyle(
-                                letterSpacing: 1,),
+                              letterSpacing: 1,
+                            ),
                           ),
                         ],
                       ),

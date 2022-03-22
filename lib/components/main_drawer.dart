@@ -20,10 +20,19 @@ curretndata() async {
       .doc(auth.currentUser?.uid)
       .get();
   name = userCredentials.data()?["name"];
-  print("object $name");
+  email = userCredentials.data()?["email"];
+  phone = userCredentials.data()?["phone"];
+  username = userCredentials.data()!["username"];
+  print("object ${name + email + phone + username} ");
 }
 
 var name;
+
+var email;
+
+var phone;
+
+var username;
 
 class Main_Drawer extends StatefulWidget {
   const Main_Drawer({key}) : super(key: key);
@@ -106,12 +115,12 @@ class _Main_DrawerState extends State<Main_Drawer> {
                     style: TextStyle(fontSize: 18, color: Colors.black),
                     recognizer: TapGestureRecognizer()
                       ..onTap = () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => userOrder(),
-                          ),
-                        );
+                        // Navigator.push(
+                        //   context,
+                        //   MaterialPageRoute(
+                        //     builder: (context) => userOrder(),
+                        //   ),
+                        // );
                       },
                   ),
                 ],
@@ -128,12 +137,12 @@ class _Main_DrawerState extends State<Main_Drawer> {
                     style: TextStyle(fontSize: 18, color: Colors.black),
                     recognizer: TapGestureRecognizer()
                       ..onTap = () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => notify(),
-                          ),
-                        );
+                        // Navigator.push(
+                        //   context,
+                        //   MaterialPageRoute(
+                        //     builder: (context) => notify(),
+                        //   ),
+                        // );
                       },
                   ),
                 ],
@@ -150,12 +159,12 @@ class _Main_DrawerState extends State<Main_Drawer> {
                     style: TextStyle(fontSize: 18, color: Colors.black),
                     recognizer: TapGestureRecognizer()
                       ..onTap = () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => Aboutus(),
-                          ),
-                        );
+                        // Navigator.push(
+                        //   context,
+                        //   MaterialPageRoute(
+                        //     builder: (context) => Aboutus(),
+                        //   ),
+                        // );
                       },
                   ),
                 ],
@@ -172,6 +181,7 @@ class _Main_DrawerState extends State<Main_Drawer> {
                     style: TextStyle(fontSize: 18, color: Colors.black),
                     recognizer: TapGestureRecognizer()
                       ..onTap = () {
+                        curretndata();
                         Navigator.push(
                           context,
                           MaterialPageRoute(

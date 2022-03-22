@@ -23,47 +23,8 @@ TextEditingController repasswordcontroller = TextEditingController();
 TextEditingController fullnamecontroller = TextEditingController();
 TextEditingController usernamecontroller = TextEditingController();
 TextEditingController phoneNumbercontroller = TextEditingController();
-userStore() async {}
-// Future userregister() async {
-//   try {
-//     String url = "https://rentacar1311.azurewebsites.net/api/v1/signup";
-//     var response = await http.post(Uri.parse(url), body: {
-//       "fullname": name.text,
-//       "username": name.text,
-//       "phoneNumber": phoneNumbercontroller.text,
-//       "email": email.text,
-//       "password": password.text,
-//       "confirmPassword": password.text,
-//       "role": "Buyer",
-//     });
-//     print("response status :" + response.statusCode.toString());
-//     print("response body :" + response.body.toString());
+// userStore() async {}
 
-//     var data = json.decode(response.body);
-//     print("okkkkk" + data);
-//     // if (data == "Error") {
-//     //   Fluttertoast.showToast(
-//     //       msg: "User Already Exist",
-//     //       toastLength: Toast.LENGTH_SHORT,
-//     //       gravity: ToastGravity.CENTER,
-//     //       timeInSecForIosWeb: 1,
-//     //       backgroundColor: Colors.red,
-//     //       textColor: Colors.white,
-//     //       fontSize: 16.0);
-//     // } else {
-//     //   Fluttertoast.showToast(
-//     //       msg: "Successfull",
-//     //       toastLength: Toast.LENGTH_SHORT,
-//     //       gravity: ToastGravity.CENTER,
-//     //       timeInSecForIosWeb: 1,
-//     //       backgroundColor: Colors.red,
-//     //       textColor: Colors.white,
-//     //       fontSize: 16.0);
-//     // }
-//   } catch (e) {
-//     print(e.toString());
-//   }
-// }
 
 class _registerState extends State<register> {
   @override
@@ -103,7 +64,7 @@ class _registerState extends State<register> {
             toastLength: Toast.LENGTH_SHORT,
             gravity: ToastGravity.CENTER,
             timeInSecForIosWeb: 1,
-            backgroundColor: Colors.red,
+            backgroundColor: Colors.green,
             textColor: Colors.white,
             fontSize: 16.0);
         Navigator.push(

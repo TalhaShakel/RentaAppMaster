@@ -1,11 +1,14 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:renta/components/tabs.dart';
-import 'package:renta/components/tabsbar.dart';
+import 'package:renta/screens/Aboutus.dart';
+import 'package:renta/screens/Profile.dart';
 import 'package:renta/screens/login.dart';
+import 'package:renta/screens/package.dart';
 import 'package:renta/screens/services_provider.dart';
+import 'package:renta/screens/singleperson.dart';
 import 'package:renta/screens/splash_page.dart';
 import 'screens/register.dart';
+import 'screens/splash_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -34,7 +37,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.green,
       ),
-      home: login(),
+      home: profile(),
     );
   }
 }

@@ -227,7 +227,7 @@ class _ServicesProviderState extends State<ServicesProvider> {
         ),
         appBar: AppBar(
           backgroundColor: orangeColors,
-          title: Text("Renta"),
+          title: Text("RENTA",style: TextStyle(fontSize:25,fontWeight: FontWeight.bold),),
           iconTheme: const IconThemeData(
             color: Colors.white,
           ),
@@ -244,12 +244,12 @@ class _ServicesProviderState extends State<ServicesProvider> {
                 ),
               ),
               GestureDetector(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const profile()),
-                  );
-                },
+                // onTap: () {
+                //   Navigator.push(
+                //     context,
+                //     MaterialPageRoute(builder: (context) => const profile()),
+                //   );
+                // },
                 child: Padding(
                   padding: const EdgeInsets.only(top: 16, right: 16, left: 16),
                   child: Container(
@@ -286,22 +286,22 @@ class _ServicesProviderState extends State<ServicesProvider> {
                             ),
                           ],
                         ),
-                        Container(
-                          decoration: const BoxDecoration(
-                            color: Color(0xFF1B6A65),
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(15),
-                            ),
-                          ),
-                          height: MediaQuery.of(context).size.height * 0.1,
-                          width: 50,
-                          child: const Center(
-                            child: Icon(
-                              Icons.arrow_forward_ios,
-                              color: Colors.white,
-                            ),
-                          ),
-                        ),
+                        // Container(
+                        //   decoration: const BoxDecoration(
+                        //     color: Color(0xFF1B6A65),
+                        //     borderRadius: BorderRadius.all(
+                        //       Radius.circular(15),
+                        //     ),
+                        //   ),
+                        //   height: MediaQuery.of(context).size.height * 0.1,
+                        //   width: 50,
+                        //   child: const Center(
+                        //     child: Icon(
+                        //       Icons.arrow_forward_ios,
+                        //       color: Colors.white,
+                        //     ),
+                        //   ),
+                        // ),
                       ],
                     ),
                   ),
@@ -327,16 +327,16 @@ class _ServicesProviderState extends State<ServicesProvider> {
                       ),
                       tabs: [
                         const Tab(
-                          text: 'Sedan',
+                          text: 'SEDAN',
                         ),
                         const Tab(
-                          text: 'Luxury',
+                          text: 'LUXURY',
                         ),
                         const Tab(
                           text: 'SUV',
                         ),
                         const Tab(
-                          text: 'hatchbag',
+                          text: 'HATCHBAG',
                         )
                       ]),
                 ),
@@ -407,9 +407,8 @@ class _ServicesProviderState extends State<ServicesProvider> {
                                                     Text(
                                                       list[index]['modal'],
                                                       style: const TextStyle(
-                                                          fontSize: 20,
-                                                          fontWeight:
-                                                              FontWeight.bold),
+                                                          fontSize: 15,
+                                                          ),
                                                     ),
                                                     // Text(
                                                     //   list[index]['weekly'],
@@ -499,9 +498,8 @@ class _ServicesProviderState extends State<ServicesProvider> {
                                                     Text(
                                                       list1[index]['modal'],
                                                       style: const TextStyle(
-                                                          fontSize: 20,
-                                                          fontWeight:
-                                                              FontWeight.bold),
+                                                          fontSize: 15,
+                                                          ),
                                                     ),
                                                     Text(
                                                       list1[index]['carName'],
@@ -581,9 +579,8 @@ class _ServicesProviderState extends State<ServicesProvider> {
                                                     Text(
                                                       list2[index]['modal'],
                                                       style: const TextStyle(
-                                                          fontSize: 20,
-                                                          fontWeight:
-                                                              FontWeight.bold),
+                                                          fontSize: 15,
+                                                          ),
                                                     ),
                                                     Text(
                                                       list2[index]['carName'],
@@ -670,9 +667,8 @@ class _ServicesProviderState extends State<ServicesProvider> {
                                                     Text(
                                                       list3[index]['modal'],
                                                       style: const TextStyle(
-                                                          fontSize: 20,
-                                                          fontWeight:
-                                                              FontWeight.bold),
+                                                          fontSize: 15,
+                                                          ),
                                                     ),
                                                     // Text(
                                                     //   list[index]['weekly'],
