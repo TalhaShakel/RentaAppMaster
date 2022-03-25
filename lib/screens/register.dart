@@ -25,8 +25,11 @@ TextEditingController usernamecontroller = TextEditingController();
 TextEditingController phoneNumbercontroller = TextEditingController();
 // userStore() async {}
 
-
 class _registerState extends State<register> {
+  var confirmPass;
+
+  bool hoja = false;
+
   @override
   Widget build(BuildContext context) {
     registerfirebase() async {
@@ -331,8 +334,12 @@ class _registerState extends State<register> {
                     focusedBorder: InputBorder.none,
                   ),
                   validator: (value) {
+                    confirmPass = value;
+
                     if (value!.isEmpty) {
-                      return "Password is required";
+                      return "Please Re-Enter New Password";
+                    } else if (value.length < 6) {
+                      return "Password must be atleast 8 characters long";
                     }
                     return null;
                   },
@@ -355,32 +362,33 @@ class _registerState extends State<register> {
                   ],
                 ),
                 child: TextFormField(
-                  controller: repasswordcontroller,
-                  obscureText: true,
-                  onChanged: (value) {},
-                  cursorColor: Color(0xFF1B6A65),
-                  // ignore: unnecessary_const
-                  decoration: const InputDecoration(
-                    focusColor: Color(0xFF1B6A65),
+                    controller: repasswordcontroller,
+                    obscureText: true,
+                    onChanged: (value) {},
+                    cursorColor: Color(0xFF1B6A65),
                     // ignore: unnecessary_const
-                    icon: const Icon(
-                      Icons.vpn_key,
-                      color: Color(0xFF1B6A65),
+                    decoration: const InputDecoration(
+                      focusColor: Color(0xFF1B6A65),
+                      // ignore: unnecessary_const
+                      icon: const Icon(
+                        Icons.vpn_key,
+                        color: Color(0xFF1B6A65),
+                      ),
+                      hintText: "Re-type Password",
+                      enabledBorder: InputBorder.none,
+                      focusedBorder: InputBorder.none,
                     ),
-                    hintText: "Re-type Password",
-                    enabledBorder: InputBorder.none,
-                    focusedBorder: InputBorder.none,
-                  ),
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return "Enter password again!";
-                    }
-                    if (passwordcontroller.text != value) {
-                      return "Password does not match!";
-                    }
-                    return null;
-                  },
-                ),
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return "Please Re-Enter New Password";
+                      } else if (value.length < 6) {
+                        return "Password must be atleast 8 characters long";
+                      } else if (value != confirmPass) {
+                        return "Password must be same as above";
+                      } else {
+                        return null;
+                      }
+                    }),
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 3.0, bottom: 8),
@@ -388,7 +396,9 @@ class _registerState extends State<register> {
                   child: ButtonWidget(
                     onClick: () async {
                       try {
-                        registerfirebase();
+                        _formKey.currentState!.validate()
+                            ? registerfirebase()
+                            : "not validate";
                       } catch (e) {
                         print(e);
                       }

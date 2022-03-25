@@ -3,7 +3,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:get/get.dart';
 import 'package:http/http.dart';
+import 'package:renta/screens/services_provider.dart';
 import 'package:renta/screens/splash_page.dart';
 
 import 'time_location.dart';
@@ -26,64 +28,66 @@ class ConfirmOrder extends StatelessWidget {
   String url =
       "https://rentacar1311.azurewebsites.net/api/v1/order/create-order";
 
-  postdata() async {
-    var pagl;
-
-    final user = FirebaseAuth.instance.currentUser;
-
-    try {
-      FirebaseFirestore db = FirebaseFirestore.instance;
-      final userCredentials = await FirebaseFirestore.instance
-          .collection("users")
-          .doc(user?.uid)
-          .get();
-
-      pagl = userCredentials.data()?["email"];
-
-      print(pagl);
-
-      await db.collection("order").doc(user.toString()).set({
-        "name": userCredentials.data()!["name"],
-        "email": userCredentials.data()!["email"],
-        "phone": userCredentials.data()!["phone"],
-        "username": userCredentials.data()!["username"],
-        "datetime": "$selectedDate",
-        "carId": "$car2",
-        "carColor": "White",
-        "packageName": "$pack2",
-        "orderedAddress": "$address",
-        "time": selectedDate.toString(),
-        "Day": selectedDate.day.toString(),
-        "price": price.toString(),
-
-        // "forWedding": wedyes ? "Yes" : "No",
-      });
-      Fluttertoast.showToast(
-          msg: "Your Order have been place! $pagl",
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.CENTER,
-          timeInSecForIosWeb: 3,
-          backgroundColor: Color(0xFF1B6A65),
-          textColor: Colors.white,
-          fontSize: 16.0);
-      // print(" ${response.body} Data is post");
-    } catch (e) {
-      print(e.toString());
-      Fluttertoast.showToast(
-          msg: "$e",
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.CENTER,
-          timeInSecForIosWeb: 1,
-          backgroundColor: Colors.red,
-          textColor: Colors.white,
-          fontSize: 16.0);
-    }
-  }
-
   // String value;
   // ConfirmOrder(this.value, {value});
   @override
   Widget build(BuildContext context) {
+    postdata() async {
+      var pagl;
+
+      final user = FirebaseAuth.instance.currentUser;
+
+      try {
+        FirebaseFirestore db = FirebaseFirestore.instance;
+        final userCredentials = await FirebaseFirestore.instance
+            .collection("users")
+            .doc(user?.uid)
+            .get();
+
+        pagl = userCredentials.data()?["email"];
+
+        print(pagl);
+
+        await db.collection("order").doc(user.toString()).set({
+          "name": userCredentials.data()!["name"],
+          "email": userCredentials.data()!["email"],
+          "phone": userCredentials.data()!["phone"],
+          "username": userCredentials.data()!["username"],
+          "datetime": "$selectedDate",
+          "carId": "$car2",
+          "carColor": "White",
+          "packageName": "$pack2",
+          "orderedAddress": "$address",
+          "time": selectedDate.toString(),
+          "Day": selectedDate.day.toString(),
+          "price": price.toString(),
+
+          // "forWedding": wedyes ? "Yes" : "No",
+        });
+        Fluttertoast.showToast(
+                msg: "Your Order have been place! $pagl",
+                toastLength: Toast.LENGTH_SHORT,
+                gravity: ToastGravity.CENTER,
+                timeInSecForIosWeb: 5,
+                backgroundColor: Color(0xFF1B6A65),
+                textColor: Colors.white,
+                fontSize: 16.0)
+            .whenComplete(() => Navigator.push(context,
+                MaterialPageRoute(builder: (context) => ServicesProvider())));
+        // print(" ${response.body} Data is post");
+      } catch (e) {
+        print(e.toString());
+        Fluttertoast.showToast(
+            msg: "Your Order is not place",
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.CENTER,
+            timeInSecForIosWeb: 3,
+            backgroundColor: Colors.red,
+            textColor: Colors.white,
+            fontSize: 16.0);
+      }
+    }
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color(0xFF1B6A65),
@@ -129,7 +133,9 @@ class ConfirmOrder extends StatelessWidget {
                               fontWeight: FontWeight.bold),
                         ),
                         const Text(
-                          """. With Driver 
+                          """
+
+. With Driver 
 . No fuel Commissions &Without Fuel
 . No High-fares No HiddenCharges.""",
                           textAlign: TextAlign.left,
@@ -141,7 +147,7 @@ class ConfirmOrder extends StatelessWidget {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(top: 10.0),
+                    padding: const EdgeInsets.only(top: 2.0),
                     child: Container(
                       padding: const EdgeInsets.all(14),
                       decoration: BoxDecoration(
@@ -163,11 +169,14 @@ class ConfirmOrder extends StatelessWidget {
                                 fontWeight: FontWeight.bold),
                           ),
                           const Text(
-                            """Rental Charges only Valid for Karachi CITY. 
-Add On Charges will be applied for Extra Per Hours
-1- Sedan = 250
-2- Hatch Back = 200
-3- Luxury & SUV= 500""",
+                            """
+
+Rental Charges only Valid for Karachi CITY. 
+Add On Charges will be applied for extra per 
+
+. Sedan = 250
+. Hatch Back = 200
+. Luxury & SUV= 500""",
                             style: const TextStyle(
                               letterSpacing: 1,
                             ),
@@ -175,7 +184,7 @@ Add On Charges will be applied for Extra Per Hours
                           const Padding(
                             padding: EdgeInsets.only(top: 8.0),
                             child: const Text(
-                              "Rental charges are only valid for within Karachi City. Rs.500/HOUR will be charged for an extra hour in HalfDAY Rental Rs.200/HOUR will be charged for an extra hour in FULL-DAY Rental.",
+                              "Rental charges are only valid for within Karachi City.",
                               textAlign: TextAlign.left,
                               style: TextStyle(
                                 letterSpacing: 1,
@@ -187,7 +196,7 @@ Add On Charges will be applied for Extra Per Hours
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(top: 18.0),
+                    padding: const EdgeInsets.only(top: 4.0),
                     child: Container(
                       padding: const EdgeInsets.all(14),
                       decoration: BoxDecoration(
@@ -206,7 +215,9 @@ Add On Charges will be applied for Extra Per Hours
                                 fontWeight: FontWeight.bold),
                           ),
                           Text(
-                            """Package: ${pack2.toUpperCase()}
+                            """
+
+Package: ${pack2.toUpperCase()}
 Price: ${price.toUpperCase()}
 Delivery Date: ${selectedDate}
 Address: ${address.toUpperCase()} """,

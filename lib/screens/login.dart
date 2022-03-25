@@ -3,11 +3,14 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:http/http.dart';
 import 'package:renta/components/main_drawer.dart';
 import 'package:renta/screens/forgetpass.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'services_provider.dart';
 import 'register.dart';
 import 'splash_page.dart';
+import 'package:get/get.dart';
 
 class login extends StatefulWidget {
   const login({Key? key}) : super(key: key);
@@ -24,38 +27,6 @@ class _loginState extends State<login> {
   TextEditingController pass = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    //  void geti() async {
-    //   var pagl;
-    //   final user = FirebaseAuth.instance.currentUser;
-    //   final userCredentials = await FirebaseFirestore.instance
-    //       .collection("Service")
-    //       .doc(user.uid)
-    //       .get();
-
-    //   pagl = userCredentials.data()["email"];
-
-    //   print(pagl);
-    // }
-    // userStore() async {
-    //   FirebaseFirestore db = FirebaseFirestore.instance;
-    //   String uid = await auth.currentUser.uid;
-
-    //   try {
-    //     await db.collection("Service").doc(uid).set({
-    //       "name": name.text,
-    //       "email": email.text,
-    //       "phone": phone.text,
-    //       "password": pass.text,
-    //       "service": _mySelection,
-    //       "cnic": cnic.text,
-    //       "location": await location.toString()
-    //     });
-    //     print("User is register");
-    //   } catch (e) {
-    //     print("ERROR");
-    //   }
-    // }
-
     signin() async {
       try {
         await FirebaseAuth.instance.signInWithEmailAndPassword(
@@ -74,7 +45,7 @@ class _loginState extends State<login> {
       } catch (e) {
         print("ERROR $e");
         Fluttertoast.showToast(
-            msg: "$e",
+            msg: "Incorrect Email and Password",
             toastLength: Toast.LENGTH_SHORT,
             gravity: ToastGravity.CENTER,
             timeInSecForIosWeb: 1,
@@ -135,28 +106,6 @@ class _loginState extends State<login> {
                   children: [
                     Image.asset("assets/images/rentalogo.png",
                         height: 130, width: 250),
-                    // Container(
-                    //     height: 25,
-                    //     width: 300,
-                    //     decoration: BoxDecoration(
-                    //       gradient: LinearGradient(
-                    //           colors: [orangeColors, orangeLightColors],
-                    //           end: Alignment.bottomCenter,
-                    //           begin: Alignment.topCenter),
-                    //     ),
-                    //     // color:  [orangeColors, orangeLightColors],
-                    //     child:
-                    //      Padding(
-                    //       padding: const EdgeInsets.only(left: 30),
-                    //       child: Text(
-                    //         "Please Login To Your Account",
-                    //         style: TextStyle(
-                    //             fontSize: 18,
-                    //             fontWeight: FontWeight.bold,
-                    //             color: Colors.white),
-                    //       ),
-                    //     )
-                    //     ),
                     Container(
                       margin:
                           const EdgeInsets.only(top: 8, left: 10, right: 10),
@@ -165,7 +114,7 @@ class _loginState extends State<login> {
                         controller: logemail,
                         style: const TextStyle(color: Colors.white),
                         decoration: InputDecoration(
-                          labelText: 'User Name',
+                          labelText: 'Email',
                           labelStyle: const TextStyle(
                             color: Colors.white,
                           ),
@@ -229,48 +178,6 @@ class _loginState extends State<login> {
                         ),
                       ),
                     ),
-                    // Container(
-                    //   height: 40,
-                    //   width: 400,
-                    //   color: Colors.white,
-                    //   child: Row(
-                    //     // ignore: prefer_const_literals_to_create_immutables
-                    //     children: [
-                    //       Padding(
-                    //         padding: const EdgeInsets.only(left: 2),
-                    //         child: Text(
-                    //           "Cbx",
-                    //           style: TextStyle(
-                    //             color: Colors.green[800],
-                    //             fontSize: 14,
-                    //           ),
-                    //         ),
-                    //       ),
-                    //       Padding(
-                    //         padding: const EdgeInsets.only(left: 8),
-                    //         child: Text(
-                    //           "Rmemember me?",
-                    //           style: TextStyle(
-                    //             color: Colors.green[800],
-                    //             fontWeight: FontWeight.bold,
-                    //             fontSize: 14,
-                    //           ),
-                    //         ),
-                    //       ),
-                    //       Padding(
-                    //         padding: const EdgeInsets.only(left: 70),
-                    //         child: Text(
-                    //           "Forgot Password?",
-                    //           style: TextStyle(
-                    //             fontWeight: FontWeight.bold,
-                    //             color: Colors.green[800],
-                    //             fontSize: 14,
-                    //           ),
-                    //         ),
-                    //       ),
-                    //     ],
-                    //   ),
-                    // ),
                     Padding(
                       padding: const EdgeInsets.only(top: 2.0, bottom: 8),
                       child: Container(
@@ -283,6 +190,13 @@ class _loginState extends State<login> {
                                 begin: Alignment.topCenter)),
                         child: ElevatedButton(
                           onPressed: () async {
+                            final SharedPreferences sharedPreferences =
+                                await SharedPreferences.getInstance();
+                            sharedPreferences.setString("email", logemail.text);
+                            var obtaindemail =
+                                await sharedPreferences.getString("email");
+                            print("obtaindemail" + obtaindemail.toString());
+                            // Get.to(ServicesProvider());
                             curretndata();
                             await signin();
                           },

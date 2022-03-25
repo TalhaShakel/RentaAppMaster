@@ -7,6 +7,7 @@ import 'package:renta/screens/login.dart';
 import 'package:renta/screens/notification.dart';
 import 'package:renta/screens/orders.dart';
 import 'package:renta/screens/singleperson.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../screens/Aboutus.dart';
 import '../screens/Profile.dart';
@@ -68,7 +69,10 @@ class _Main_DrawerState extends State<Main_Drawer> {
                   // ignore: prefer_const_constructors
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                    color: Colors.white,
+                    image: DecorationImage(
+                        image: NetworkImage(
+                            "https://e7.pngegg.com/pngimages/643/98/png-clipart-computer-icons-avatar-mover-business-flat-design-corporate-elderly-care-microphone-heroes-thumbnail.png"),
+                        fit: BoxFit.fill),
                   ),
                 ),
                 Text(
@@ -159,12 +163,12 @@ class _Main_DrawerState extends State<Main_Drawer> {
                     style: TextStyle(fontSize: 18, color: Colors.black),
                     recognizer: TapGestureRecognizer()
                       ..onTap = () {
-                        // Navigator.push(
-                        //   context,
-                        //   MaterialPageRoute(
-                        //     builder: (context) => Aboutus(),
-                        //   ),
-                        // );
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => Aboutus(),
+                          ),
+                        );
                       },
                   ),
                 ],
@@ -182,12 +186,12 @@ class _Main_DrawerState extends State<Main_Drawer> {
                     recognizer: TapGestureRecognizer()
                       ..onTap = () {
                         curretndata();
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => profile(),
-                          ),
-                        );
+                        // Navigator.push(
+                        //   context,
+                        //   MaterialPageRoute(
+                        //     builder: (context) => profile(),
+                        //   ),
+                        // );
                       },
                   ),
                 ],
@@ -211,6 +215,9 @@ class _Main_DrawerState extends State<Main_Drawer> {
                     style: TextStyle(fontSize: 18, color: Colors.black),
                     recognizer: TapGestureRecognizer()
                       ..onTap = () async {
+                        SharedPreferences sharedPreferences =
+                            await SharedPreferences.getInstance();
+                        sharedPreferences.remove("email");
                         try {
                           FirebaseAuth auth = await FirebaseAuth.instance;
                           auth.signOut();

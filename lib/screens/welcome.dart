@@ -1,52 +1,3 @@
-// import 'dart:async';
-
-// import 'package:flutter/material.dart';
-// import 'package:renta/pages/login_page.dart';
-// import 'package:renta/pages/splash_page.dart';
-
-// import 'package:renta/utils/color.dart';
-
-// class wlecome extends StatefulWidget {
-//   const wlecome({key}) : super(key: key);
-
-//   @override
-//   welcome2 createState() => welcome2();
-// }
-
-// class welcome2 extends State<wlecome> {
-//   @override
-//   void initState() {
-//     // TODO: implement initState
-//     super.initState();
-//     Timer(const Duration(minutes: 1), () {
-//       Navigator.push(
-//           context, MaterialPageRoute(builder: (context) => const SplashPage2()));
-//     });
-//   }
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       body: Container(
-//         decoration: BoxDecoration(
-//           gradient: LinearGradient(
-//               colors: [orangeColors, orangeLightColors],
-//               end: Alignment.bottomCenter,
-//               begin: Alignment.topCenter),
-//         ),
-//         child: Center(
-//           child: Image.asset(
-//             "assets/images/rentalogo.png",
-//             height: 550,
-//           ),
-//         ),
-//       ),
-//     );
-//   }
-// }
-import 'dart:async';
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 
 import '../widgets/btn_widget.dart';
@@ -60,16 +11,6 @@ class SplashPage2 extends StatefulWidget {
 }
 
 class _SplashPage2State extends State<SplashPage2> {
-  // @override
-  // void initState() {
-  //   // TODO: implement initState
-  //   super.initState();
-  //   Timer(const Duration(minutes: 10), () {
-  //     Navigator.push(
-  //         context, MaterialPageRoute(builder: (context) => const LoginPage()));
-  //   });
-  // }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

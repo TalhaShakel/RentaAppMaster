@@ -9,9 +9,16 @@ import 'package:renta/screens/singleperson.dart';
 import 'package:renta/screens/splash_page.dart';
 import 'screens/register.dart';
 import 'screens/splash_page.dart';
+import 'sherd.dart';
+import 'package:flutter/services.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]);
+
   await Firebase.initializeApp();
   runApp(const MyApp());
 }
@@ -37,7 +44,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.green,
       ),
-      home: profile(),
+      home: SplashPage(),
     );
   }
 }

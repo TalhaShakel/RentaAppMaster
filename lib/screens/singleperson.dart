@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 import 'package:http/http.dart' as http;
@@ -107,8 +108,7 @@ class _SingleState extends State<Single> {
                                     fontWeight: FontWeight.bold, fontSize: 35)),
                             Text(widget.category.toString().toUpperCase(),
                                 textAlign: TextAlign.left,
-                                style: const TextStyle(
-                                    fontWeight: FontWeight.bold, fontSize: 25)),
+                                style: const TextStyle(fontSize: 20)),
                           ],
                         ),
                       ),
@@ -162,9 +162,9 @@ class _SingleState extends State<Single> {
                     // crossAxisAl,
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      buildSpecificationCar("Color", "White", false),
-                      buildSpecificationCar("Condition", "10/10", true),
-                      buildSpecificationCar("Gearbox", "Automatic", false),
+                      buildSpecificationCar("Color", "White / Black", false),
+                      buildSpecificationCar("Condition", "10 / 10", true),
+                      buildSpecificationCar("Gearbox", "Auto / Manual", false),
                     ],
                   ),
                 ),
@@ -222,6 +222,7 @@ class _SingleState extends State<Single> {
         ),
       ),
     ));
+
     // (ye nav ka secion hai)
   }
 
@@ -323,7 +324,7 @@ class _SingleState extends State<Single> {
 
 Widget buildSpecificationCar(String title, String data, bool star) {
   return Container(
-    width: 130,
+    width: 150,
     decoration: const BoxDecoration(
       color: Colors.white,
       borderRadius: const BorderRadius.all(
@@ -331,7 +332,7 @@ Widget buildSpecificationCar(String title, String data, bool star) {
       ),
     ),
     padding: const EdgeInsets.symmetric(
-      vertical: 8,
+      vertical: 10,
       horizontal: 16,
     ),
     margin: const EdgeInsets.only(right: 16),
